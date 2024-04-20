@@ -1,0 +1,29 @@
+import { nanoid } from "nanoid";
+import { GameConfig } from "../Ruleset";
+import { CellSetupConfig } from "./types";
+
+class Cell {
+  constructor({ canvasX, canvasY, x, y }: CellSetupConfig) {
+    this.canvasX = canvasX;
+    this.canvasY = canvasY;
+    this.x = x;
+    this.y = y;
+    this.id = nanoid();
+  }
+  canvasX: number;
+  canvasY: number;
+  config: GameConfig = {};
+  currentColor: string;
+  id: string;
+  nextColor: string;
+  x: number;
+  y: number;
+  setCurrentColor(newColor: string) {
+    this.currentColor = newColor;
+  }
+  setNextColor(newColor: string) {
+    this.nextColor = newColor;
+  }
+}
+
+export default Cell;
