@@ -1,4 +1,4 @@
-import { RPSGameConfig } from "../../../../rulesets";
+import { RPSGameConfig } from "../../../../internal";
 import { UpdateConfigFn } from "../types";
 
 export interface RockPaperScissorsControlsProps {

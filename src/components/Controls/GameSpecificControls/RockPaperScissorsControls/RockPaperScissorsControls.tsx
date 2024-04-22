@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { MuiColorInput } from "mui-color-input";
 import { RockPaperScissorsControlsProps } from "./types";
-import { RPSGameConfig, RulesetName } from "../../../../rulesets";
+import { RPSGameConfig, RulesetName } from "../../../../internal";
 
 const RockPaperScissorsControls = ({
   config,

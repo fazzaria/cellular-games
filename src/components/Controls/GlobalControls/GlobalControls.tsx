@@ -12,14 +12,15 @@ import {
   Button,
   Checkbox,
 } from "@mui/material";
-import { CellShape } from "../../../classes";
 import {
+  CellShape,
   defaultCellSize,
   defaultGlobalConfig,
   defaultThrottleAmount,
-} from "../../../const";
-import { GameDescription } from "../../GameDescription";
-import { RulesetName, rulesetDisplayNameMap } from "../../../rulesets";
+  GameDescription,
+  rulesetDisplayNameMap,
+  RulesetName,
+} from "../../../internal";
 import { GlobalControlsProps } from "./types";
 
 const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {

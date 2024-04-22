@@ -1,5 +1,5 @@
 import { GameContextType } from "./types";
-import { defaultGlobalConfig } from "../const";
+import { defaultGlobalConfig } from "../internal";
 
 const defaultGameContextValue: GameContextType = {
   globalConfig: { ...defaultGlobalConfig },

@@ -1,6 +1,4 @@
 import { useContext, useState } from "react";
-import GameContext from "../../context/GameContext";
-import { ControlsProps } from "./types";
 import {
   Box,
   Button,
@@ -10,10 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { GameConfigs, GlobalConfig } from "../../context";
-import { GlobalControls } from "./GlobalControls";
+import {
+  GameConfigs,
+  GameContext,
+  GlobalConfig,
+  clearCanvas,
+  createGrid,
+} from "../../internal";
 import { GameSpecificControls } from "./GameSpecificControls";
-import { clearCanvas, createGrid } from "../../utils";
+import { GlobalControls } from "./GlobalControls";
+import { ControlsProps } from "./types";
 
 const Controls = ({ closeDrawer }: ControlsProps) => {
   const { globalConfig, setGlobalConfig, setGrid } = useContext(GameContext);

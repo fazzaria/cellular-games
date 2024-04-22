@@ -1,6 +1,4 @@
-import { GameConfig } from "../../classes";
-import { defaultGameOptions } from "../../const";
-import { RulesetName } from "../../rulesets";
+import { defaultGameOptions, GameConfig, RulesetName } from "../../internal";
 
 const initializeConfigs = () => {
   const savedConfigs = {};

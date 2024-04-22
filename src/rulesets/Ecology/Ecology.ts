@@ -1,12 +1,10 @@
-import { Ruleset, Grid } from "../../classes";
-import { defaultGameOptions } from "../../const";
+import { defaultGameOptions, Grid, Ruleset, RulesetName } from "../../internal";
 import {
   averageInitialSpawnNumberMap,
   creatureColorMap,
   creatureLifespanMap,
   neighborsRequiredMap,
 } from "./const";
-import { RulesetName } from "../types";
 import { EcologyCell, CreatureType, EcologyGameConfig } from "./types";
 
 class Ecology implements Ruleset {

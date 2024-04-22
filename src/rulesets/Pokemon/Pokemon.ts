@@ -1,8 +1,11 @@
-import { Ruleset, Grid } from "../../classes";
-import { defaultGameOptions } from "../../const";
-import { GlobalConfig } from "../../context";
-import { randomFromArray } from "../../utils";
-import { RulesetName } from "../types";
+import {
+  defaultGameOptions,
+  GlobalConfig,
+  Grid,
+  randomFromArray,
+  Ruleset,
+  RulesetName,
+} from "../../internal";
 import { typeMatchup, matchupScoring } from "./const";
 import {
   MatchupKey,

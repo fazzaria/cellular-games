@@ -1,25 +1,27 @@
 import {
-  getNeighbors,
-  drawHexagon,
-  drawSquare,
+  Cell,
   clearCanvas,
   createHexRows,
   createSquareRows,
-} from "../../utils";
-import { Cell } from "../Cell";
+  drawHexagon,
+  drawSquare,
+  getNeighbors,
+} from "../../internal";
 import { GridConfig } from "./types";
 
 class Grid {
   constructor(config: GridConfig) {
     this.config = config;
+    const { cellShape, loops } = this.config;
     this.setupCells();
-    this.getNeighbors = getNeighbors.bind(this);
+    this.getNeighbors = (cell: Cell) =>
+      getNeighbors({ cellShape, loops, rows: this.rows }, cell);
     this.init();
   }
   config: GridConfig;
   ctx: CanvasRenderingContext2D = null;
   rows: Cell[][] = [];
-  getNeighbors: typeof getNeighbors;
+  getNeighbors: (cell: Cell) => Cell[];
   init() {
     this.config.ruleset.init(this);
     this.render();

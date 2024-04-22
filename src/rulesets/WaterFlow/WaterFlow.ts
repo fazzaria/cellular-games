@@ -1,14 +1,15 @@
-import { Cell, Grid, Ruleset } from "../../classes";
-import { defaultGameOptions } from "../../const";
 import {
+  Cell,
+  defaultGameOptions,
   getAverageColor,
   getRandomCell,
+  Grid,
   randomFromArray,
   randomHueShift,
+  Ruleset,
+  RulesetName,
   shuffle,
-} from "../../utils";
-import { WarGameConfig } from "../War/types";
-import { RulesetName } from "../types";
+} from "../../internal";
 import {
   averageStartingWaterCells,
   backgroundBlurAmount,
@@ -25,6 +26,7 @@ import {
   WaterConfig,
   isWater,
   rockToWater,
+  WaterFlowGameConfig,
 } from "./types";
 
 const blur = (grid: Grid) => {
@@ -55,10 +57,10 @@ const blur = (grid: Grid) => {
 const handleRockUpdate = () => {}; */
 
 class WaterFlow implements Ruleset {
-  constructor(config: Partial<WarGameConfig> = {}) {
+  constructor(config: Partial<WaterFlowGameConfig> = {}) {
     this.config = { ...defaultGameOptions[RulesetName.WATER_FLOW], ...config };
   }
-  config: WarGameConfig;
+  config: WaterFlowGameConfig;
   init(grid: Grid) {
     let totalCells = 0;
     let waterExists = false;

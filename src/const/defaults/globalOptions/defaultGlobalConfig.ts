@@ -1,10 +1,9 @@
 import defaultGridConfig from "./defaultGridConfig";
-import { GlobalConfig } from "../../../context";
+import { GlobalConfig, initializeConfigs } from "../../../internal";
 import {
   defaultRulesetName,
   defaultThrottleAmount,
 } from "../defaultConfigValues";
-import { initializeConfigs } from "../../../utils";
 
 const defaultGlobalConfig: GlobalConfig = {
   gridConfig: defaultGridConfig,

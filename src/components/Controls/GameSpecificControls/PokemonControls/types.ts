@@ -1,4 +1,4 @@
-import { PokemonGameConfig } from "../../../../rulesets";
+import { PokemonGameConfig } from "../../../../internal";
 import { UpdateConfigFn } from "../types";
 
 export interface PokemonControlsProps {

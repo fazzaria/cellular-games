@@ -1,8 +1,12 @@
-import { Grid, Ruleset } from "../../classes";
-import { defaultGameOptions, possibleColors } from "../../const";
-import { RulesetName } from "../types";
+import {
+  defaultGameOptions,
+  Grid,
+  possibleColors,
+  randomFromArray,
+  Ruleset,
+  RulesetName,
+} from "../../internal";
 import { WarGameConfig } from "./types";
-import { randomFromArray } from "../../utils";
 
 class War implements Ruleset {
   constructor(config: Partial<WarGameConfig> = {}) {

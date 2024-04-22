@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Grid,
   TextField,
@@ -8,15 +9,13 @@ import {
   FormLabel,
   MenuItem,
 } from "@mui/material";
+import { MuiColorInput } from "mui-color-input";
 import { PokemonControlsProps } from "./types";
 import {
   PokemonGameConfig,
   PokemonType,
   RulesetName,
-} from "../../../../rulesets";
-import { MuiColorInput } from "mui-color-input";
-import { Fragment } from "react/jsx-runtime";
-import { useState } from "react";
+} from "../../../../internal";
 
 const PokemonControls = ({ config, setConfig }: PokemonControlsProps) => {
   const [typeToChangeColor, setTypeToChangeColor] = useState<PokemonType>(

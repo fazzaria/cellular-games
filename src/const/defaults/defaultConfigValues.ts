@@ -1,5 +1,4 @@
-import { CellShape } from "../../classes";
-import { RulesetName } from "../../rulesets";
+import { CellShape, RulesetName } from "../../internal";
 
 const defaultCellShape: CellShape = "square";
 const defaultCellSize = 6;

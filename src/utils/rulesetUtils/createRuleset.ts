@@ -1,16 +1,16 @@
-import { GameConfig } from "../../classes";
 import {
-  RulesetName,
   Blur,
   Conway,
   Ecology,
+  GameConfig,
   MazeGenerator,
   Pokemon,
   RockPaperScissors,
+  RulesetName,
   Snowflake,
   War,
   WaterFlow,
-} from "../../rulesets";
+} from "../../internal";
 
 const createRuleset = (rulesetName: RulesetName, config?: GameConfig) => {
   switch (rulesetName) {

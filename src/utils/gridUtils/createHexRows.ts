@@ -1,5 +1,4 @@
-import { Cell, GridConfig } from "../../classes";
-import { angleOfHexagonalSide } from "../../const";
+import { angleOfHexagonalSide, Cell, GridConfig } from "../../internal";
 
 const createHexRows = (config: GridConfig) => {
   const rows: Cell[][] = [];

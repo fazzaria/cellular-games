@@ -1,5 +1,4 @@
-import { Cell } from "../../classes";
-import { angleOfHexagonalSide } from "../../const";
+import { angleOfHexagonalSide, Cell } from "../../internal";
 
 const drawHexagon = (
   cell: Cell,

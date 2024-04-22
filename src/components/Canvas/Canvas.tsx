@@ -1,8 +1,11 @@
 import { CanvasProps } from "./types";
 import { useContext, useEffect } from "react";
-import GameContext from "../../context/GameContext";
-import { useCanvas } from "../../hooks";
-import { getCanvasSize, getContext } from "../../utils";
+import {
+  GameContext,
+  getCanvasSize,
+  getContext,
+  useCanvas,
+} from "../../internal";
 
 const Canvas = (props: CanvasProps) => {
   const { canvasAttributes } = props;

@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { RulesetName } from "../../rulesets";
+import { RulesetName } from "../../internal";
 import { GameDescriptionProps } from "./types";
 
 const GameDescription = ({ rulesetName }: GameDescriptionProps) => {

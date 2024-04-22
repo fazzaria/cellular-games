@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import { Box, Fab, Collapse, Drawer } from "@mui/material";
 import DownIcon from "@mui/icons-material/KeyboardArrowDown";
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -5,11 +6,7 @@ import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { useContext, useState } from "react";
-import { CANVAS_ID } from "../../const";
-import { GameContext } from "../../context";
-import { Canvas } from "../Canvas";
-import { Controls } from "../Controls";
+import { Canvas, CANVAS_ID, Controls, GameContext } from "../../internal";
 
 const GameScreen = () => {
   const { grid, paused, togglePause } = useContext(GameContext);

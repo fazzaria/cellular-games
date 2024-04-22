@@ -1,5 +1,5 @@
 import { useRef, useEffect, useContext } from "react";
-import { GameContext } from "../context";
+import { GameContext } from "../internal";
 
 const useCanvas = (draw: (frameCount: number) => void) => {
   const { paused } = useContext(GameContext);

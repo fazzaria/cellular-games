@@ -1,7 +1,6 @@
-import { GameScreen } from "./components";
-import GameContextProvider from "./context/GameContextProvider";
+import { GameContextProvider, GameScreen } from "./internal";
 
-const App = () => { 
+const App = () => {
   return (
     <GameContextProvider>
       <GameScreen />

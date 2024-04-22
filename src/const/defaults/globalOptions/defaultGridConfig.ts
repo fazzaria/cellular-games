@@ -1,11 +1,10 @@
-import { GridConfig } from "../../../classes";
+import { createRuleset, getCanvasSize, GridConfig } from "../../../internal";
 import {
   defaultCellShape,
   defaultCellSize,
   defaultGridLoops,
   defaultRulesetName,
 } from "../defaultConfigValues";
-import { createRuleset, getCanvasSize } from "../../../utils";
 
 const { height, width } = getCanvasSize();
 

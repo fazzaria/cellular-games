@@ -1,16 +1,16 @@
 import { Grid, Typography, Button } from "@mui/material";
-import { GameConfig } from "../../../classes";
 import {
-  RulesetName,
   ConwayConfig,
+  defaultGameOptions,
+  GameConfig,
   PokemonGameConfig,
   RPSGameConfig,
-} from "../../../rulesets";
+  RulesetName,
+} from "../../../internal";
 import { ConwayControls } from "./ConwayControls";
 import { PokemonControls } from "./PokemonControls";
 import { RockPaperScissorsControls } from "./RockPaperScissorsControls";
 import { GameSpecificControlsProps, UpdateConfigFn } from "./types";
-import { defaultGameOptions } from "../../../const";
 
 const GameSpecificControls = ({
   configs,

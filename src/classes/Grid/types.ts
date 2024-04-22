@@ -1,4 +1,4 @@
-import { Ruleset } from "..";
+import { Ruleset } from "../../internal";
 
 export type CellShape = "hex" | "square";
 

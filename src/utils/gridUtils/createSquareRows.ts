@@ -1,4 +1,4 @@
-import { Cell, GridConfig } from "../../classes";
+import { Cell, GridConfig } from "../../internal";
 
 const createSquareRows = (config: GridConfig) => {
   const rows: Cell[][] = [];

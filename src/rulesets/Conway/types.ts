@@ -1,4 +1,4 @@
-import { Cell } from "../../classes";
+import { Cell } from "../../internal";
 
 export enum Preset {
   DEFAULT = "default",

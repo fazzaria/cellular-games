@@ -9,10 +9,10 @@ import {
   EcologyGameConfig,
   PokemonGameConfig,
   RPSGameConfig,
+  SnowflakeGameConfig,
+  WarGameConfig,
   WaterFlowGameConfig,
-} from "../../../rulesets";
-import { SnowflakeGameConfig } from "../../../rulesets/Snowflake/types";
-import { WarGameConfig } from "../../../rulesets/War/types";
+} from "../../../internal";
 import defaultPokemonColors from "./defaultPokemonColors";
 
 const defaultGameOptions: { [key in RulesetName]: GameConfig } = {

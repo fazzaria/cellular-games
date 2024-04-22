@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { GameConfig, Grid, GridConfig } from "../classes";
-import { RulesetName } from "../rulesets";
+import { GameConfig, Grid, GridConfig, RulesetName } from "../internal";
 
 export type GameConfigs = { [key in RulesetName]: GameConfig };
 

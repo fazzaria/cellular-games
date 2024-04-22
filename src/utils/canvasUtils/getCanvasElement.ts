@@ -1,4 +1,4 @@
-import { CANVAS_ID } from "../../const";
+import { CANVAS_ID } from "../../internal";
 
 const getCanvasElement = () =>
   document.getElementById(CANVAS_ID) as HTMLCanvasElement;

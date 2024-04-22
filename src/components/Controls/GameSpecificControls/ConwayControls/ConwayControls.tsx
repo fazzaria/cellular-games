@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Grid,
   TextField,
@@ -9,12 +10,14 @@ import {
   Checkbox,
 } from "@mui/material";
 import { MuiColorInput } from "mui-color-input";
-import { ConwayConfig, Preset } from "../../../../rulesets/Conway/types";
+import {
+  ConwayConfig,
+  GameContext,
+  Preset,
+  RulesetName,
+} from "../../../../internal";
 import { presetDisplayNameMap } from "./const";
 import { ConwayControlsProps } from "./types";
-import { useContext } from "react";
-import GameContext from "../../../../context/GameContext";
-import { RulesetName } from "../../../../rulesets";
 
 const ConwayControls = ({ config, setConfig }: ConwayControlsProps) => {
   const { grid } = useContext(GameContext);

@@ -1,4 +1,4 @@
-import { Cell } from "../../classes";
+import { Cell } from "../../internal";
 
 const getRandomCell = (rows: Cell[][]) => {
   const randomY = Math.floor(Math.random() * rows.length);

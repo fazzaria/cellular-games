@@ -1,6 +1,4 @@
-import { Ruleset, Grid } from "../../classes";
-import { defaultGameOptions } from "../../const";
-import { RulesetName } from "../types";
+import { defaultGameOptions, Grid, Ruleset, RulesetName } from "../../internal";
 import { ConwayCell, ConwayConfig } from "./types";
 
 class Conway implements Ruleset {

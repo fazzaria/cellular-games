@@ -1,11 +1,14 @@
-import { Cell, Grid } from "../../classes";
+import { Cell, CellShape } from "../../internal";
 
-function getNeighbors(this: Grid, cell: Cell, radius: number = 1) {
-  const {
-    config: { cellShape, loops },
+function getNeighbors(
+  {
+    cellShape,
+    loops,
     rows,
-  } = this;
-
+  }: { cellShape: CellShape; loops: boolean; rows: Cell[][] },
+  cell: Cell,
+  radius: number = 1
+) {
   const { x: cellX, y: cellY } = cell;
 
   if (!rows[0]?.length) return [];

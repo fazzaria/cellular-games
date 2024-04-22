@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { GameConfig } from "../../../classes";
-import { GameConfigs } from "../../../context";
-import { RulesetName } from "../../../rulesets";
+import { GameConfig, GameConfigs, RulesetName } from "../../../internal";
 
 export interface GameSpecificControlsProps {
   configs: GameConfigs;

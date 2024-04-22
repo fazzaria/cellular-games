@@ -1,4 +1,4 @@
-import { PokemonType } from "../../../rulesets";
+import { PokemonType } from "../../../internal";
 
 const defaultPokemonColors = {
   [PokemonType.NORMAL]: "#A8A77A",

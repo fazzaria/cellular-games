@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
-import { GameConfig } from "../Ruleset";
-import { CellSetupConfig } from "./types";
+import { CellSetupConfig, GameConfig } from "../../internal";
 
 class Cell {
   constructor({ canvasX, canvasY, x, y }: CellSetupConfig) {

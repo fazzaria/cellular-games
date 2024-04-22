@@ -1,8 +1,13 @@
-import { defaultGameOptions, possibleColors } from "../../const";
-import { Ruleset, Grid } from "../../classes";
-import { randomFromArray, getAverageColor } from "../../utils";
+import {
+  defaultGameOptions,
+  getAverageColor,
+  Grid,
+  possibleColors,
+  randomFromArray,
+  Ruleset,
+  RulesetName,
+} from "../../internal";
 import { BlurConfig } from "./types";
-import { RulesetName } from "../types";
 
 class Blur implements Ruleset {
   constructor(config: Partial<BlurConfig> = {}) {

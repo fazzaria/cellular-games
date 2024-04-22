@@ -1,7 +1,10 @@
-import { Ruleset, Grid } from "../../classes";
-import { defaultGameOptions } from "../../const";
-import { randomFromArray } from "../../utils";
-import { RulesetName } from "../types";
+import {
+  defaultGameOptions,
+  Grid,
+  randomFromArray,
+  Ruleset,
+  RulesetName,
+} from "../../internal";
 import { RPSGameConfig } from "./types";
 
 class RockPaperScissors implements Ruleset {

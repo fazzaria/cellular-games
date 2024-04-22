@@ -1,4 +1,4 @@
-import { Preset } from "../../../../rulesets/Conway/types";
+import { Preset } from "../../../../internal";
 
 export const presetDisplayNameMap = {
   [Preset.DEFAULT]: "Random Distribution",

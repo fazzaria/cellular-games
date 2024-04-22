@@ -1,4 +1,4 @@
-import { ConwayConfig } from "../../../../rulesets/Conway/types";
+import { ConwayConfig } from "../../../../internal";
 import { UpdateConfigFn } from "../types";
 
 export interface ConwayControlsProps {

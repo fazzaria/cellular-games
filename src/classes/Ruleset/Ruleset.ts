@@ -1,5 +1,4 @@
 import { GlobalConfig } from "../../context";
-import { Grid } from "../Grid";
 import { GameConfig } from "./types";
 
 abstract class Ruleset {
@@ -8,8 +7,8 @@ abstract class Ruleset {
   }
   config?: GameConfig;
   defaultGlobalSettings?: GlobalConfig;
-  init: (grid: Grid) => void;
-  update: (grid: Grid) => void;
+  init: (arg0: any) => void;
+  update: (arg0: any) => void;
 }
 
 export default Ruleset;
