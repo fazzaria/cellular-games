@@ -15,11 +15,3 @@ export interface MazeConfig {
   liveColor: string;
   liveStartPercent: number;
 }
-
-export const defaultMazeConfig: MazeConfig = {
-  deadColor: "#640d14",
-  neighborsNeededToReproduce: [3],
-  neighborsNeededToSurvive: [2, 3],
-  liveColor: "#90be6d",
-  liveStartPercent: 10,
-};

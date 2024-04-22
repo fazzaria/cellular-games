@@ -8,5 +8,6 @@ export interface GridConfig {
   height: number;
   loops: boolean;
   ruleset: Ruleset;
+  screenDoor: boolean;
   width: number;
 }

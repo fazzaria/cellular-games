@@ -10,19 +10,24 @@ import {
   FormControlLabel,
   Radio,
   Button,
+  Checkbox,
 } from "@mui/material";
 import { CellShape } from "../../../classes";
-import { defaultCellSize, defaultThrottleAmount } from "../../../const";
+import {
+  defaultCellSize,
+  defaultGlobalConfig,
+  defaultThrottleAmount,
+} from "../../../const";
+import { GameDescription } from "../../GameDescription";
 import { RulesetName, rulesetDisplayNameMap } from "../../../rulesets";
 import { GlobalControlsProps } from "./types";
-import { defaultGlobalConfig } from "../../../context";
-import { GameDescription } from "../../GameDescription";
 
 const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
+  const { gridConfig, rulesetName, throttleAmount } = config;
   const updateGridConfig = (prop: string, value: any) => {
     setConfig({
       ...config,
-      gridConfig: { ...config.gridConfig, [prop]: value },
+      gridConfig: { ...gridConfig, [prop]: value },
     });
   };
 
@@ -35,7 +40,7 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
       <Grid item xs={12}>
         <TextField
           fullWidth
-          helperText={<GameDescription rulesetName={config.rulesetName} />}
+          helperText={<GameDescription rulesetName={rulesetName} />}
           label="Game Mode"
           onChange={(e) => {
             setConfig({
@@ -44,7 +49,7 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
             });
           }}
           select
-          value={config.rulesetName}
+          value={rulesetName}
         >
           {Object.keys(RulesetName).map((name) => {
             return (
@@ -67,7 +72,7 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
                 (e.target as HTMLInputElement).value as CellShape
               );
             }}
-            value={config.gridConfig.cellShape}
+            value={gridConfig.cellShape}
           >
             <FormControlLabel
               value="hex"
@@ -93,10 +98,25 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
               parseInt(e.target.value) ?? defaultCellSize
             )
           }
-          value={config.gridConfig.cellSize}
+          value={gridConfig.cellSize}
         />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item md={6} xs={12}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={gridConfig.loops}
+              onChange={(e) => {
+                updateGridConfig("loops", e.target.checked);
+              }}
+              name={`enable-type-select-all-checkbox`}
+              value={gridConfig.loops}
+            />
+          }
+          label={"Wrap Grid"}
+        />
+      </Grid>
+      <Grid item md={6} xs={12}>
         <TextField
           fullWidth
           helperText="WARNING: Low throttle amounts may create patterns of flashing lights."
@@ -108,7 +128,7 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
               throttleAmount: parseInt(e.target.value) ?? defaultThrottleAmount,
             })
           }
-          value={config.throttleAmount}
+          value={throttleAmount}
         />
       </Grid>
       <Grid item xs={12}>

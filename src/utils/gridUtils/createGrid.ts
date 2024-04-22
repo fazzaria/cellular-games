@@ -1,21 +1,18 @@
 import { Grid } from "../../classes";
 import { GlobalConfig } from "../../context/types";
-import { getCanvasSize } from "../canvas-utils";
-import { createRuleset } from "../ruleset-utils";
+import { getCanvasSize } from "../canvasUtils";
+import { createRuleset } from "../rulesetUtils";
 
 const createGrid = (config: GlobalConfig) => {
   const { height, width } = getCanvasSize();
-  const { cellShape, cellSize, loops } = config.gridConfig;
   return new Grid({
+    ...config.gridConfig,
     height,
-    width,
-    cellShape,
-    cellSize,
-    loops,
     ruleset: createRuleset(
       config.rulesetName,
       config.savedConfigs[config.rulesetName]
     ),
+    width,
   });
 };
 

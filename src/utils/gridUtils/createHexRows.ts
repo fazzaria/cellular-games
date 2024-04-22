@@ -1,20 +1,18 @@
 import { Cell, GridConfig } from "../../classes";
-import { a } from "../../const";
+import { angleOfHexagonalSide } from "../../const";
 
 const createHexRows = (config: GridConfig) => {
   const rows: Cell[][] = [];
   const { cellSize, height, width } = config;
-  for (
-    let y = cellSize;
-    y + cellSize * Math.sin(a) < height;
-    y += cellSize * Math.sin(a)
-  ) {
+  const cosA = Math.cos(angleOfHexagonalSide);
+  const sinA = Math.sin(angleOfHexagonalSide);
+
+  for (let y = cellSize; y + cellSize * sinA < height; y += cellSize * sinA) {
     rows.push([]);
     for (
       let x = cellSize, j = 0;
-      x + cellSize * (1 + Math.cos(a)) < width;
-      x += cellSize * (1 + Math.cos(a)),
-        y += (-1) ** j++ * cellSize * Math.sin(a)
+      x + cellSize * (1 + cosA) < width;
+      x += cellSize * (1 + cosA), y += (-1) ** j++ * cellSize * sinA
     ) {
       const newHex = new Cell({
         canvasX: x,

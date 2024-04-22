@@ -2,8 +2,6 @@ import { Cell } from "../../classes";
 
 export interface WaterFlowGameConfig {}
 
-export const defaultWaterFlowConfig: WaterFlowGameConfig = {};
-
 export interface RockConfig {
   baseColor: string;
   colorsToAverage: string[];

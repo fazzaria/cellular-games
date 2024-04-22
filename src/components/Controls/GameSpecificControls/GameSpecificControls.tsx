@@ -6,11 +6,11 @@ import {
   PokemonGameConfig,
   RPSGameConfig,
 } from "../../../rulesets";
-import { getDefaultConfig } from "../../../utils";
 import { ConwayControls } from "./ConwayControls";
 import { PokemonControls } from "./PokemonControls";
 import { RockPaperScissorsControls } from "./RockPaperScissorsControls";
 import { GameSpecificControlsProps, UpdateConfigFn } from "./types";
+import { defaultGameOptions } from "../../../const";
 
 const GameSpecificControls = ({
   configs,
@@ -69,7 +69,7 @@ const GameSpecificControls = ({
         <Grid item xs={12}>
           <Button
             onClick={() =>
-              handleUpdateConfig(rulesetName, getDefaultConfig(rulesetName))
+              handleUpdateConfig(rulesetName, defaultGameOptions[rulesetName])
             }
           >
             Reset to Default

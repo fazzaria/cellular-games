@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import { GameContextType, defaultGameContextValue } from "./types";
+import defaultGameContextValue from "./const";
+import { GameContextType } from "./types";
 
 const GameContext = createContext<GameContextType>(defaultGameContextValue);
 

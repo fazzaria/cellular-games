@@ -1,8 +1,7 @@
 import { useRef, useEffect, useContext } from "react";
-import { DrawFn } from "../components/Canvas";
 import { GameContext } from "../context";
 
-const useCanvas = (draw: DrawFn) => {
+const useCanvas = (draw: (frameCount: number) => void) => {
   const { paused } = useContext(GameContext);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

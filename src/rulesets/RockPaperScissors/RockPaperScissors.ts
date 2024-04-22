@@ -1,10 +1,15 @@
 import { Ruleset, Grid } from "../../classes";
+import { defaultGameOptions } from "../../const";
 import { randomFromArray } from "../../utils";
-import { RPSGameConfig, defaultRPSConfig } from "./types";
+import { RulesetName } from "../types";
+import { RPSGameConfig } from "./types";
 
 class RockPaperScissors implements Ruleset {
   constructor(config: Partial<RPSGameConfig> = {}) {
-    this.config = { ...defaultRPSConfig, ...config };
+    this.config = {
+      ...defaultGameOptions[RulesetName.ROCK_PAPER_SCISSORS],
+      ...config,
+    } as RPSGameConfig;
   }
   config: RPSGameConfig;
   init(grid: Grid) {

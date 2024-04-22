@@ -1,5 +1,5 @@
 import { Cell } from "../../classes";
-import { a } from "../../const";
+import { angleOfHexagonalSide } from "../../const";
 
 const drawHexagon = (
   cell: Cell,
@@ -14,8 +14,8 @@ const drawHexagon = (
 
   for (var i = 0; i < 6; i++) {
     ctx.lineTo(
-      cell.canvasX + cellSize * Math.cos(a * i),
-      cell.canvasY + cellSize * Math.sin(a * i)
+      cell.canvasX + cellSize * Math.cos(angleOfHexagonalSide * i),
+      cell.canvasY + cellSize * Math.sin(angleOfHexagonalSide * i)
     );
   }
   ctx.closePath();

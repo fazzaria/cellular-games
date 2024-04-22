@@ -1,20 +1,20 @@
 import { Ruleset, Grid } from "../../classes";
+import { defaultGameOptions } from "../../const";
 import {
   averageInitialSpawnNumberMap,
   creatureColorMap,
   creatureLifespanMap,
   neighborsRequiredMap,
 } from "./const";
-import {
-  EcologyCell,
-  CreatureType,
-  EcologyGameConfig,
-  defaultEcologyConfig,
-} from "./types";
+import { RulesetName } from "../types";
+import { EcologyCell, CreatureType, EcologyGameConfig } from "./types";
 
 class Ecology implements Ruleset {
   constructor(config: Partial<EcologyGameConfig> = {}) {
-    this.config = { ...defaultEcologyConfig, ...config };
+    this.config = {
+      ...defaultGameOptions[RulesetName.MAZE_GENERATOR],
+      ...config,
+    } as EcologyGameConfig;
   }
   config: EcologyGameConfig;
   init(grid: Grid) {

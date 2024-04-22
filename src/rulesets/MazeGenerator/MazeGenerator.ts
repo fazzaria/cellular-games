@@ -1,9 +1,14 @@
 import { Ruleset, Grid } from "../../classes";
-import { MazeCell, MazeConfig, defaultMazeConfig } from "./types";
+import { defaultGameOptions } from "../../const";
+import { RulesetName } from "../types";
+import { MazeCell, MazeConfig } from "./types";
 
 class MazeGenerator implements Ruleset {
   constructor(config: Partial<MazeConfig> = {}) {
-    this.config = { ...defaultMazeConfig, ...config };
+    this.config = {
+      ...defaultGameOptions[RulesetName.MAZE_GENERATOR],
+      ...config,
+    } as MazeConfig;
   }
   config: MazeConfig;
   init(grid: Grid) {

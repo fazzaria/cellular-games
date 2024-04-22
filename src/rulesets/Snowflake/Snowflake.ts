@@ -1,12 +1,14 @@
 import { Ruleset, Grid } from "../../classes";
-import { SnowflakeGameConfig, defaultSnowflakeConfig } from "./types";
+import { defaultGameOptions } from "../../const";
+import { RulesetName } from "../types";
+import { SnowflakeGameConfig } from "./types";
 
 const aliveColor = "#15616d";
 const deadColor = "#001524";
 
 class Snowflake implements Ruleset {
   constructor(config: Partial<SnowflakeGameConfig> = {}) {
-    this.config = { ...defaultSnowflakeConfig, ...config };
+    this.config = { ...defaultGameOptions[RulesetName.SNOWFLAKE], ...config };
   }
   config: SnowflakeGameConfig;
   init(grid: Grid) {

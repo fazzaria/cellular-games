@@ -1,9 +1,14 @@
 import { Ruleset, Grid } from "../../classes";
-import { ConwayCell, ConwayConfig, defaultConwayConfig } from "./types";
+import { defaultGameOptions } from "../../const";
+import { RulesetName } from "../types";
+import { ConwayCell, ConwayConfig } from "./types";
 
 class Conway implements Ruleset {
   constructor(config: Partial<ConwayConfig> = {}) {
-    this.config = { ...defaultConwayConfig, ...config };
+    this.config = {
+      ...defaultGameOptions[RulesetName.CONWAY],
+      ...config,
+    } as ConwayConfig;
   }
   config: ConwayConfig;
   init(grid: Grid) {

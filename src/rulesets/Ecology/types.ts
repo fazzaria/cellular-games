@@ -2,8 +2,6 @@ import { Cell } from "../../classes";
 
 export interface EcologyGameConfig {}
 
-export const defaultEcologyConfig: EcologyGameConfig = {};
-
 export enum CreatureType {
   NONE = "none",
   DEAD = "dead",

@@ -1,4 +1,5 @@
 import { Cell, Grid, Ruleset } from "../../classes";
+import { defaultGameOptions } from "../../const";
 import {
   getAverageColor,
   getRandomCell,
@@ -7,6 +8,7 @@ import {
   shuffle,
 } from "../../utils";
 import { WarGameConfig } from "../War/types";
+import { RulesetName } from "../types";
 import {
   averageStartingWaterCells,
   backgroundBlurAmount,
@@ -21,7 +23,6 @@ import {
   RockConfig,
   WaterCell,
   WaterConfig,
-  defaultWaterFlowConfig,
   isWater,
   rockToWater,
 } from "./types";
@@ -55,7 +56,7 @@ const handleRockUpdate = () => {}; */
 
 class WaterFlow implements Ruleset {
   constructor(config: Partial<WarGameConfig> = {}) {
-    this.config = { ...defaultWaterFlowConfig, ...config };
+    this.config = { ...defaultGameOptions[RulesetName.WATER_FLOW], ...config };
   }
   config: WarGameConfig;
   init(grid: Grid) {

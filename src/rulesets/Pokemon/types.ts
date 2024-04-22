@@ -1,19 +1,5 @@
 import { Cell } from "../../classes";
 
-export interface PokemonGameConfig {
-  /* dragon types (and dragon-steel-fairy tricolor spirals) tend to dominate the screen,
-     so an option is provided to disable them */
-  disableDragon: boolean;
-  /* the odds that a cell will turn into a random pokemon type rather than follow normal rules.
-  prevents stagnation or types going extinct */
-  randomMutationChance: number;
-}
-
-export const defaultPokemonConfig: PokemonGameConfig = {
-  disableDragon: true,
-  randomMutationChance: 750,
-};
-
 export interface PokemonCellConfig {
   currentType: PokemonType;
   nextType: PokemonType;
@@ -24,24 +10,32 @@ export type PokemonCell = Omit<Cell, "config"> & {
 };
 
 export enum PokemonType {
-  NORMAL = "normal",
-  FIRE = "fire",
-  WATER = "water",
-  ELECTRIC = "electric",
-  GRASS = "grass",
-  ICE = "ice",
-  FIGHTING = "fighting",
-  POISON = "poison",
-  GROUND = "ground",
-  FLYING = "flying",
-  PSYCHIC = "psychic",
-  BUG = "bug",
-  ROCK = "rock",
-  GHOST = "ghost",
-  DRAGON = "dragon",
-  DARK = "dark",
-  STEEL = "steel",
-  FAIRY = "fairy",
+  BUG = "Bug",
+  DARK = "Dark",
+  DRAGON = "Dragon",
+  ELECTRIC = "Electric",
+  FAIRY = "Fairy",
+  FIGHTING = "Fighting",
+  FIRE = "Fire",
+  FLYING = "Flying",
+  GHOST = "Ghost",
+  GRASS = "Grass",
+  GROUND = "Ground",
+  ICE = "Ice",
+  NORMAL = "Normal",
+  POISON = "Poison",
+  PSYCHIC = "Psychic",
+  ROCK = "Rock",
+  STEEL = "Steel",
+  WATER = "Water",
+}
+
+export interface PokemonGameConfig {
+  allowedTypes: PokemonType[];
+  /* the odds that a cell will turn into a random pokemon type rather than follow normal rules.
+  prevents stagnation or types going extinct */
+  randomMutationChance: number;
+  typeColors: { [key in PokemonType]: string };
 }
 
 export enum MatchupKey {

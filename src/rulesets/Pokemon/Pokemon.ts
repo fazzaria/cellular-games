@@ -1,36 +1,36 @@
 import { Ruleset, Grid } from "../../classes";
+import { defaultGameOptions } from "../../const";
+import { GlobalConfig } from "../../context";
 import { randomFromArray } from "../../utils";
-import { typeColorMap, typeMatchup, matchupScoring } from "./const";
+import { RulesetName } from "../types";
+import { typeMatchup, matchupScoring } from "./const";
 import {
-  defaultPokemonConfig,
   MatchupKey,
   PokemonCell,
   PokemonGameConfig,
   PokemonType,
 } from "./types";
 
-const types = Object.keys(PokemonType).map(
-  (key: string) => PokemonType[key as keyof typeof PokemonType]
-);
-
 class Pokemon implements Ruleset {
   constructor(config: Partial<PokemonGameConfig> = {}) {
-    this.config = { ...defaultPokemonConfig, ...config };
-    if (this.config.disableDragon) {
-      this.filteredTypes = types.filter((type) => type !== PokemonType.DRAGON);
-    }
+    this.config = {
+      ...defaultGameOptions[RulesetName.POKEMON],
+      ...config,
+    } as PokemonGameConfig;
   }
   config: PokemonGameConfig;
-  filteredTypes: PokemonType[] = types;
+  defaultGlobalSettings: GlobalConfig;
   init(grid: Grid) {
     grid.iterateCells((cell) => {
-      const type = randomFromArray(this.filteredTypes);
+      const { allowedTypes, typeColors } = this.config;
+      const type = randomFromArray(allowedTypes) || PokemonType.ELECTRIC;
       cell.config.currentType = type;
-      cell.currentColor = typeColorMap[type];
+      cell.currentColor = typeColors[type];
     });
   }
   update(grid: Grid) {
     grid.iterateCells((cell) => {
+      const { allowedTypes, randomMutationChance, typeColors } = this.config;
       const neighbors = grid.getNeighbors(cell);
 
       const neighborTypes = neighbors.map(
@@ -41,8 +41,8 @@ class Pokemon implements Ruleset {
       let nextType = cell.config.currentType;
 
       // add random mutations to prevent stable states
-      if (Math.floor(Math.random() * this.config.randomMutationChance) === 1) {
-        nextType = randomFromArray(this.filteredTypes);
+      if (Math.floor(Math.random() * randomMutationChance) === 1) {
+        nextType = randomFromArray(allowedTypes) || PokemonType.ELECTRIC;
       } else {
         let averageDamageDealt = 0;
         let averageDamageReceived = 0;
@@ -74,7 +74,7 @@ class Pokemon implements Ruleset {
         }
       }
       cell.config.nextType = nextType;
-      cell.setNextColor(typeColorMap[nextType as keyof typeof typeColorMap]);
+      cell.setNextColor(typeColors[nextType]);
     });
     grid.iterateCells((cell) => {
       cell.setCurrentColor(cell.nextColor);

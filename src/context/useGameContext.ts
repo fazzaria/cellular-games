@@ -1,11 +1,8 @@
 import { useState } from "react";
-import {
-  GameContextType,
-  GlobalConfig,
-  defaultGameContextValue,
-  defaultGlobalConfig,
-} from "./types";
+import { GameContextType, GlobalConfig } from "./types";
 import { Grid } from "../classes";
+import { defaultGlobalConfig } from "../const";
+import defaultGameContextValue from "./const";
 import { createGrid } from "../utils";
 
 const useGameContext = (): GameContextType => {
