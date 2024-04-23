@@ -25,7 +25,7 @@ export const defaultGlobalConfigs: GlobalConfigs = {
   [RulesetName.CONWAY]: overrideDefaultGlobalConfig({}),
   [RulesetName.MAZE_GENERATOR]: overrideDefaultGlobalConfig({}),
   [RulesetName.POKEMON]: overrideDefaultGlobalConfig({
-    gridConfig: { cellShape: "hex" },
+    gridConfig: { cellShape: "hex", loops: false },
   }),
   [RulesetName.ROCK_PAPER_SCISSORS]: overrideDefaultGlobalConfig({
     gridConfig: { cellShape: "hex" },
