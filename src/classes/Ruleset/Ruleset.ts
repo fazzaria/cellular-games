@@ -1,11 +1,11 @@
 import { GlobalConfig } from "../../context";
-import { GameConfig } from "./types";
+import { GameSpecificConfig } from "./types";
 
 abstract class Ruleset {
-  constructor(config?: GameConfig) {
+  constructor(config?: GameSpecificConfig) {
     this.config = config;
   }
-  config?: GameConfig;
+  config?: GameSpecificConfig;
   defaultGlobalSettings?: GlobalConfig;
   init: (arg0: any) => void;
   update: (arg0: any) => void;

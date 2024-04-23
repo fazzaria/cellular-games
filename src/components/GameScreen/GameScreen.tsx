@@ -12,7 +12,7 @@ import { ControlsContextProvider } from "../Controls/context";
 const GameScreen = () => {
   const { grid, paused, togglePause } = useContext(GameContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [controlsOpen, setControlsOpen] = useState(true);
+  const [controlsOpen, setControlsOpen] = useState(false);
   return (
     <>
       <Box

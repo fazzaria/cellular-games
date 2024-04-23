@@ -9,10 +9,9 @@ import {
 
 const Canvas = (props: CanvasProps) => {
   const { canvasAttributes } = props;
-  const {
-    grid,
-    globalConfig: { throttleAmount },
-  } = useContext(GameContext);
+  const { currentGame } = useContext(GameContext);
+  const { grid, globalConfigs } = useContext(GameContext);
+  const { throttleAmount } = globalConfigs[currentGame];
 
   useEffect(() => {
     if (grid && grid.ctx === null) {

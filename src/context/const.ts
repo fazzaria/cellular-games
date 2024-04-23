@@ -1,11 +1,19 @@
 import { GameContextType } from "./types";
-import { defaultGlobalConfigs, defaultRulesetName } from "../internal";
+import {
+  defaultGameOptions,
+  defaultGlobalConfigs,
+  defaultRulesetName,
+} from "../internal";
 
 const defaultGameContextValue: GameContextType = {
-  globalConfig: { ...defaultGlobalConfigs[defaultRulesetName] },
+  currentGame: defaultRulesetName,
+  gameSpecificConfigs: defaultGameOptions,
+  globalConfigs: defaultGlobalConfigs,
   grid: null,
-  paused: true,
-  setGlobalConfig: () => null,
+  paused: false,
+  setCurrentGame: () => null,
+  setGameSpecificConfigs: () => null,
+  setGlobalConfigs: () => null,
   setGrid: () => null,
   togglePause: () => null,
 };

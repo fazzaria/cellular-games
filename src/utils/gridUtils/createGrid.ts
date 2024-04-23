@@ -1,17 +1,20 @@
 import {
   createRuleset,
+  GameSpecificConfig,
   getCanvasSize,
   GlobalConfig,
   Grid,
+  RulesetName,
 } from "../../internal";
 
-const createGrid = (config: GlobalConfig) => {
+const createGrid = (
+  rulesetName: RulesetName,
+  globalConfig: GlobalConfig,
+  gameSpecificConfig: GameSpecificConfig
+) => {
   const { height, width } = getCanvasSize();
-  const ruleset = createRuleset(
-    config.rulesetName,
-    config.savedConfigs[config.rulesetName]
-  );
-  const { gridConfig } = config;
+  const ruleset = createRuleset(rulesetName, gameSpecificConfig);
+  const { gridConfig } = globalConfig;
   return new Grid({
     ...gridConfig,
     height,

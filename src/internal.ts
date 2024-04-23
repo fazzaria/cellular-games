@@ -59,8 +59,10 @@ export { default as War } from "./rulesets/War/War";
 export { default as WaterFlow } from "./rulesets/WaterFlow/WaterFlow";
 export { default as createRuleset } from "./utils/rulesetUtils/createRuleset";
 export { default as createGrid } from "./utils/gridUtils/createGrid";
-export { default as initializeConfigs } from "./utils/rulesetUtils/initializeConfigs";
-export { default as defaultGlobalConfigs } from "./const/defaults/globalOptions/defaultGlobalConfigs";
+export {
+  defaultGlobalConfigs,
+  default as useDefaultGlobalConfig,
+} from "./const/defaults/globalOptions/useDefaultGlobalConfig";
 export { default as GameContext } from "./context/GameContext";
 
 export { default as useCanvas } from "./hooks/useCanvas";

@@ -1,5 +1,9 @@
 import { Grid, Typography, Button } from "@mui/material";
-import { defaultGameOptions, RulesetName } from "../../../internal";
+import {
+  defaultGameOptions,
+  GameContext,
+  RulesetName,
+} from "../../../internal";
 import { ConwayControls } from "./ConwayControls";
 import { PokemonControls } from "./PokemonControls";
 import { RockPaperScissorsControls } from "./RockPaperScissorsControls";
@@ -11,14 +15,12 @@ import { useContext, useMemo } from "react";
 import { ControlsContext } from "../context";
 
 const GameSpecificControls = () => {
-  const {
-    newGameConfigs,
-    newGlobalConfig: { rulesetName },
-    setNewGameConfigs,
-  } = useContext(ControlsContext);
+  const { currentGame } = useContext(GameContext);
+  const { newGameSpecificConfigs, setNewGameSpecificConfigs } =
+    useContext(ControlsContext);
 
   const Component = useMemo(() => {
-    switch (rulesetName) {
+    switch (currentGame) {
       case RulesetName.CONWAY:
         return () => <ConwayControls />;
       case RulesetName.MAZE_GENERATOR:
@@ -36,7 +38,7 @@ const GameSpecificControls = () => {
       default:
         return null;
     }
-  }, [rulesetName]);
+  }, [currentGame]);
 
   return (
     <>
@@ -52,12 +54,12 @@ const GameSpecificControls = () => {
       {Component !== null && (
         <Grid item xs={12}>
           <Button
-            onClick={() =>
-              setNewGameConfigs({
-                ...newGameConfigs,
-                [rulesetName]: defaultGameOptions[rulesetName],
-              })
-            }
+            onClick={() => {
+              setNewGameSpecificConfigs({
+                ...newGameSpecificConfigs,
+                [currentGame]: defaultGameOptions[currentGame],
+              });
+            }}
           >
             Reset to Default
           </Button>

@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import {
   Grid,
   TextField,
@@ -18,7 +18,7 @@ import {
 } from "../../../../internal";
 import { presetDisplayNameMap } from "./const";
 import { ConwayColorProp } from "./types";
-import { ControlsContext } from "../../context";
+import { useGameSpecificOptions } from "../hooks";
 
 const conwayColorProps = [
   "liveColor",
@@ -29,23 +29,14 @@ const conwayColorProps = [
 
 const ConwayControls = () => {
   const { grid } = useContext(GameContext);
-  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
-  const config = useMemo(
-    () => newGameConfigs.CONWAY as ConwayConfig,
-    [newGameConfigs.CONWAY]
+  const { config, handleUpdate } = useGameSpecificOptions<ConwayConfig>(
+    RulesetName.CONWAY
   );
 
   const neighborNumbers =
     grid.config.cellShape === "hex"
       ? [0, 1, 2, 3, 4, 5, 6]
       : [0, 1, 2, 3, 4, 5, 6, 7, 8];
-
-  const handleUpdate = (newConwayConfig: ConwayConfig) => {
-    setNewGameConfigs({
-      ...newGameConfigs,
-      [RulesetName.CONWAY]: newConwayConfig,
-    });
-  };
 
   return (
     <>

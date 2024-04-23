@@ -1,20 +1,24 @@
 import { Dispatch, SetStateAction } from "react";
-import { GameConfig, Grid, GridConfig, RulesetName } from "../internal";
+import { GameSpecificConfig, Grid, GridConfig, RulesetName } from "../internal";
 
-export type GameConfigs = { [key in RulesetName]: GameConfig };
+export type GameSpecificConfigs = { [key in RulesetName]: GameSpecificConfig };
 
 export interface GlobalConfig {
   gridConfig: GridConfig;
-  rulesetName: RulesetName;
-  savedConfigs: GameConfigs;
   throttleAmount: number;
 }
 
+export type GlobalConfigs = { [key in RulesetName]: GlobalConfig };
+
 export interface GameContextType {
-  globalConfig: GlobalConfig;
+  currentGame: RulesetName;
+  gameSpecificConfigs: GameSpecificConfigs;
+  globalConfigs: GlobalConfigs;
   grid: Grid;
   paused: boolean;
-  setGlobalConfig: Dispatch<SetStateAction<GlobalConfig>>;
+  setCurrentGame: Dispatch<SetStateAction<RulesetName>>;
+  setGameSpecificConfigs: Dispatch<SetStateAction<GameSpecificConfigs>>;
+  setGlobalConfigs: Dispatch<SetStateAction<GlobalConfigs>>;
   setGrid: Dispatch<SetStateAction<Grid>>;
   togglePause: () => void;
 }

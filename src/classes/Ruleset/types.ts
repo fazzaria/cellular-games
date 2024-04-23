@@ -1,1 +1,1 @@
-export type GameConfig = { [key: string]: any };
+export type GameSpecificConfig = { [key: string]: any };

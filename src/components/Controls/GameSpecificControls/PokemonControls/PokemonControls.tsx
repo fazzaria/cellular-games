@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useState } from "react";
 import {
   Grid,
   TextField,
@@ -15,20 +15,12 @@ import {
   PokemonType,
   RulesetName,
 } from "../../../../internal";
-import { ControlsContext } from "../../context";
+import { useGameSpecificOptions } from "../hooks";
 
 const PokemonControls = () => {
-  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
-  const config = useMemo(
-    () => newGameConfigs.POKEMON as PokemonGameConfig,
-    [newGameConfigs.POKEMON]
+  const { config, handleUpdate } = useGameSpecificOptions<PokemonGameConfig>(
+    RulesetName.POKEMON
   );
-  const handleUpdate = (newPokemonConfig: PokemonGameConfig) => {
-    setNewGameConfigs({
-      ...newGameConfigs,
-      [RulesetName.POKEMON]: newPokemonConfig,
-    });
-  };
   const [typeToChangeColor, setTypeToChangeColor] = useState<PokemonType>(
     PokemonType.BUG
   );

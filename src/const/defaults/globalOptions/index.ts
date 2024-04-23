@@ -1,3 +1,4 @@
-import defaultGlobalConfigs from "./defaultGlobalConfigs";
+import { defaultGlobalConfigs } from "./useDefaultGlobalConfig";
+import useDefaultGlobalConfig from "./useDefaultGlobalConfig";
 
-export { defaultGlobalConfigs };
+export { defaultGlobalConfigs, useDefaultGlobalConfig };

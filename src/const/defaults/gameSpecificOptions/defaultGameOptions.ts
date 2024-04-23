@@ -1,4 +1,3 @@
-import { GameConfig } from "../../../classes";
 import {
   RulesetName,
   Preset,
@@ -10,10 +9,11 @@ import {
   SnowflakeGameConfig,
   WarGameConfig,
   WaterFlowGameConfig,
+  GameSpecificConfigs,
 } from "../../../internal";
 import defaultPokemonColors from "./defaultPokemonColors";
 
-const defaultGameOptions: { [key in RulesetName]: GameConfig } = {
+const defaultGameOptions: GameSpecificConfigs = {
   [RulesetName.CONWAY]: {
     cellLifespan: 10,
     deadColor: "#293462",
@@ -37,6 +37,7 @@ const defaultGameOptions: { [key in RulesetName]: GameConfig } = {
     liveStartPercent: 10,
   } as MazeConfig,
   [RulesetName.POKEMON]: {
+    // disable dragon type by default because it (and dragon-steel-fairy tricolor spirals) tend to dominate the screen
     allowedTypes: Object.keys(PokemonType)
       .map((key) => PokemonType[key])
       .filter((type) => type !== PokemonType.DRAGON),

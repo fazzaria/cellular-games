@@ -17,26 +17,24 @@ import {
   defaultCellSize,
   defaultGlobalConfigs,
   defaultThrottleAmount,
+  GameContext,
   GameDescription,
   rulesetDisplayNameMap,
   RulesetName,
 } from "../../../internal";
 import { GlobalControlsProps } from "./types";
-import { useEffect } from "react";
+import { useContext } from "react";
 
-// move these to a context to stop re-renders
 const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
-  const { gridConfig, rulesetName, throttleAmount } = config;
+  const { currentGame, setCurrentGame } = useContext(GameContext);
+  const { gridConfig, throttleAmount } = config;
+
   const updateGridConfig = (prop: string, value: any) => {
     setConfig({
       ...config,
       gridConfig: { ...gridConfig, [prop]: value },
     });
   };
-
-  useEffect(() => {
-    setConfig(defaultGlobalConfigs[config.rulesetName]);
-  }, [config.rulesetName, setConfig]);
 
   return (
     <>
@@ -47,16 +45,13 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
       <Grid item xs={12}>
         <TextField
           fullWidth
-          helperText={<GameDescription rulesetName={rulesetName} />}
+          helperText={<GameDescription rulesetName={currentGame} />}
           label="Game Mode"
           onChange={(e) => {
-            setConfig({
-              ...config,
-              rulesetName: e.target.value as RulesetName,
-            });
+            setCurrentGame(e.target.value as RulesetName);
           }}
           select
-          value={rulesetName}
+          value={currentGame}
         >
           {Object.keys(RulesetName).map((name) => {
             return (
@@ -139,9 +134,7 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button
-          onClick={() => setConfig(defaultGlobalConfigs[config.rulesetName])}
-        >
+        <Button onClick={() => setConfig(defaultGlobalConfigs[currentGame])}>
           Reset to Default
         </Button>
       </Grid>

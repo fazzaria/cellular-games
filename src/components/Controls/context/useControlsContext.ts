@@ -1,40 +1,62 @@
 import { useCallback, useContext, useMemo, useState } from "react";
-import { ControlsContextType } from "./types";
+import { ControlsContextType, GlobalConfigsTouched } from "./types";
 import {
-  GameConfigs,
+  GameSpecificConfigs,
   GameContext,
-  GlobalConfig,
+  GlobalConfigs,
+  RulesetName,
   clearCanvas,
   createGrid,
 } from "../../../internal";
 
+let initialGlobalConfigsTouched = {};
+Object.keys(RulesetName).forEach(
+  (key) => (initialGlobalConfigsTouched[RulesetName[key]] = false)
+);
+
 const useControlsContext = (): ControlsContextType => {
-  const { globalConfig, paused, setGlobalConfig, setGrid, togglePause } =
-    useContext(GameContext);
-  const [newGlobalConfig, setNewGlobalConfig] = useState<GlobalConfig>({
-    ...globalConfig,
+  const {
+    currentGame,
+    gameSpecificConfigs,
+    globalConfigs,
+    paused,
+    setGameSpecificConfigs,
+    setGlobalConfigs,
+    setGrid,
+    togglePause,
+  } = useContext(GameContext);
+  const [newGlobalConfigs, setNewGlobalConfigs] = useState<GlobalConfigs>({
+    ...globalConfigs,
   });
-  const [newGameConfigs, setNewGameConfigs] = useState<GameConfigs>({
-    ...globalConfig.savedConfigs,
-  });
+  const [newGameSpecificConfigs, setNewGameSpecificConfigs] =
+    useState<GameSpecificConfigs>({
+      ...gameSpecificConfigs,
+    });
+  const [globalConfigsTouched, setGlobalConfigsTouched] =
+    useState<GlobalConfigsTouched>();
 
   const start = useCallback(
     (closeDrawer: () => void) => {
-      const combinedConfig: GlobalConfig = {
-        ...newGlobalConfig,
-        savedConfigs: { ...newGameConfigs },
-      };
-      setGlobalConfig(combinedConfig);
+      setGlobalConfigs({ ...newGlobalConfigs });
+      setGameSpecificConfigs({ ...newGameSpecificConfigs });
       clearCanvas();
-      setGrid(createGrid(combinedConfig));
+      setGrid(
+        createGrid(
+          currentGame,
+          newGlobalConfigs[currentGame],
+          newGameSpecificConfigs[currentGame]
+        )
+      );
       if (paused) togglePause();
       closeDrawer();
     },
     [
-      newGameConfigs,
-      newGlobalConfig,
+      currentGame,
+      newGameSpecificConfigs,
+      newGlobalConfigs,
       paused,
-      setGlobalConfig,
+      setGameSpecificConfigs,
+      setGlobalConfigs,
       setGrid,
       togglePause,
     ]
@@ -42,17 +64,21 @@ const useControlsContext = (): ControlsContextType => {
 
   return useMemo(() => {
     return {
-      newGameConfigs,
-      newGlobalConfig,
-      setNewGameConfigs,
-      setNewGlobalConfig,
+      globalConfigsTouched,
+      newGameSpecificConfigs,
+      newGlobalConfigs,
+      setGlobalConfigsTouched,
+      setNewGameSpecificConfigs,
+      setNewGlobalConfigs,
       start,
     };
   }, [
-    newGameConfigs,
-    newGlobalConfig,
-    setNewGameConfigs,
-    setNewGlobalConfig,
+    globalConfigsTouched,
+    newGameSpecificConfigs,
+    newGlobalConfigs,
+    setGlobalConfigsTouched,
+    setNewGameSpecificConfigs,
+    setNewGlobalConfigs,
     start,
   ]);
 };

@@ -1,6 +1,6 @@
 import {
   Conway,
-  GameConfig,
+  GameSpecificConfig,
   MazeGenerator,
   Pokemon,
   RockPaperScissors,
@@ -10,7 +10,10 @@ import {
   WaterFlow,
 } from "../../internal";
 
-const createRuleset = (rulesetName: RulesetName, config?: GameConfig) => {
+const createRuleset = (
+  rulesetName: RulesetName,
+  config?: GameSpecificConfig
+) => {
   switch (rulesetName) {
     case RulesetName.CONWAY:
       return new Conway(config);

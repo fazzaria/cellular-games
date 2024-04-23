@@ -1,4 +1,10 @@
-import { GlobalConfig, GridConfig, RulesetName } from "../../../internal";
+import { useMemo } from "react";
+import {
+  GlobalConfig,
+  GlobalConfigs,
+  GridConfig,
+  RulesetName,
+} from "../../../internal";
 import defaultGlobalConfig from "./defaultGlobalConfig";
 import defaultGridConfig from "./defaultGridConfig";
 
@@ -15,7 +21,7 @@ const overrideDefaultGlobalConfig = (config: Override) => {
   } as GlobalConfig;
 };
 
-const defaultGlobalConfigs: { [key in RulesetName]: GlobalConfig } = {
+export const defaultGlobalConfigs: GlobalConfigs = {
   [RulesetName.CONWAY]: overrideDefaultGlobalConfig({}),
   [RulesetName.MAZE_GENERATOR]: overrideDefaultGlobalConfig({}),
   [RulesetName.POKEMON]: overrideDefaultGlobalConfig({
@@ -33,8 +39,8 @@ const defaultGlobalConfigs: { [key in RulesetName]: GlobalConfig } = {
   }),
 };
 
-Object.keys(defaultGlobalConfigs).forEach(
-  (key: RulesetName) => (defaultGlobalConfigs[key].rulesetName = key)
-);
+const useDefaultGlobalConfig = (rulesetName: RulesetName) => {
+  return useMemo(() => defaultGlobalConfigs[rulesetName], [rulesetName]);
+};
 
-export default defaultGlobalConfigs;
+export default useDefaultGlobalConfig;

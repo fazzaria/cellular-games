@@ -7,27 +7,15 @@ import {
   WarGameConfig,
   getRandomColor,
 } from "../../../../internal";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { ControlsContext } from "../../context";
+import { useState } from "react";
+import { useGameSpecificOptions } from "../hooks";
 
 const WarControls = () => {
-  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
-  const config = useMemo(
-    () => newGameConfigs.WAR as WarGameConfig,
-    [newGameConfigs.WAR]
+  const { config, handleUpdate } = useGameSpecificOptions<WarGameConfig>(
+    RulesetName.WAR
   );
-  const handleUpdate = (newWarConfig: WarGameConfig) => {
-    setNewGameConfigs({
-      ...newGameConfigs,
-      [RulesetName.WAR]: newWarConfig,
-    });
-  };
   const [newArmyColor, setNewArmyColor] = useState<string>(getRandomColor());
   const { factionColors } = config;
-
-  useEffect(() => {
-    console.log("mounted war controls", config);
-  }, [config]);
 
   return (
     <>

@@ -2,23 +2,14 @@ import { Grid } from "@mui/material";
 import { MuiColorInput } from "mui-color-input";
 import { SnowflakeGameConfig, RulesetName } from "../../../../internal";
 import { SnowflakeColorProp } from "./types";
-import { useContext, useMemo } from "react";
-import { ControlsContext } from "../../context";
+import { useGameSpecificOptions } from "../hooks";
 
 const mazeColorProps = ["liveColor", "deadColor"] as SnowflakeColorProp[];
 
 const SnowflakeControls = () => {
-  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
-  const config = useMemo(
-    () => newGameConfigs.SNOWFLAKE as SnowflakeGameConfig,
-    [newGameConfigs.SNOWFLAKE]
+  const { config, handleUpdate } = useGameSpecificOptions<SnowflakeGameConfig>(
+    RulesetName.SNOWFLAKE
   );
-  const handleUpdate = (newSnowflakeConfig: SnowflakeGameConfig) => {
-    setNewGameConfigs({
-      ...newGameConfigs,
-      [RulesetName.SNOWFLAKE]: newSnowflakeConfig,
-    });
-  };
 
   return (
     <>
