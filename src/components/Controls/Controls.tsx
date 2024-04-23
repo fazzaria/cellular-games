@@ -18,7 +18,7 @@ const Controls = ({ closeDrawer }: ControlsProps) => {
     useContext(ControlsContext);
 
   return (
-    <Box p={5}>
+    <Box p={5} sx={{ overscrollBehavior: "none" }}>
       <Grid container alignItems="center" justifyContent="flex-end">
         <Grid item>
           <IconButton onClick={closeDrawer} size="large">
