@@ -4,23 +4,8 @@ import { GameDescriptionProps } from "./types";
 
 const GameDescription = ({ rulesetName }: GameDescriptionProps) => {
   switch (rulesetName) {
-    case RulesetName.BLUR:
-      return (
-        <>
-          A simple test of a blur effect. Each turn, every cell takes on the
-          average color of itself and its neighbors.
-        </>
-      );
     case RulesetName.CONWAY:
-      return <>The original.</>;
-    case RulesetName.ECOLOGY:
-      return (
-        <>
-          WARNING: Flashing colors. This one is based on cells having different
-          roles in an ecosystem, but it's not working right now and looks more
-          like an MKUltra experiment.
-        </>
-      );
+      return <>The iconic cellular automaton.</>;
     case RulesetName.MAZE_GENERATOR:
       return (
         <>
@@ -66,7 +51,6 @@ const GameDescription = ({ rulesetName }: GameDescriptionProps) => {
       return (
         <>
           Based on the idea of water eroding and flowing through rock. Streams
-          seek out neighbors which have the most empty space around them, and
           can occasionally meet with other streams and blend their colors
           together.
         </>

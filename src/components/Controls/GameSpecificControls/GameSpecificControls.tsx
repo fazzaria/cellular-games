@@ -3,14 +3,22 @@ import {
   ConwayConfig,
   defaultGameOptions,
   GameConfig,
+  MazeConfig,
   PokemonGameConfig,
   RPSGameConfig,
   RulesetName,
+  SnowflakeGameConfig,
+  WarGameConfig,
+  WaterFlowGameConfig,
 } from "../../../internal";
 import { ConwayControls } from "./ConwayControls";
 import { PokemonControls } from "./PokemonControls";
 import { RockPaperScissorsControls } from "./RockPaperScissorsControls";
 import { GameSpecificControlsProps, UpdateConfigFn } from "./types";
+import { MazeControls } from "./MazeControls";
+import { SnowflakeControls } from "./SnowflakeControls";
+import { WarControls } from "./WarControls.ts";
+import { WaterFlowControls } from "./WaterFlowControls";
 
 const GameSpecificControls = ({
   configs,
@@ -35,6 +43,14 @@ const GameSpecificControls = ({
         />
       );
       break;
+    case RulesetName.MAZE_GENERATOR:
+      Component = () => (
+        <MazeControls
+          config={configs[rulesetName] as MazeConfig}
+          setConfig={handleUpdateConfig}
+        />
+      );
+      break;
     case RulesetName.POKEMON:
       Component = () => (
         <PokemonControls
@@ -51,6 +67,31 @@ const GameSpecificControls = ({
         />
       );
       break;
+    case RulesetName.SNOWFLAKE:
+      Component = () => (
+        <SnowflakeControls
+          config={configs[rulesetName] as SnowflakeGameConfig}
+          setConfig={handleUpdateConfig}
+        />
+      );
+      break;
+    case RulesetName.WAR:
+      Component = () => (
+        <WarControls
+          config={configs[rulesetName] as WarGameConfig}
+          setConfig={handleUpdateConfig}
+        />
+      );
+      break;
+    case RulesetName.WATER_FLOW:
+      Component = () => (
+        <WaterFlowControls
+          config={configs[rulesetName] as WaterFlowGameConfig}
+          setConfig={handleUpdateConfig}
+        />
+      );
+      break;
+
     default:
       break;
   }

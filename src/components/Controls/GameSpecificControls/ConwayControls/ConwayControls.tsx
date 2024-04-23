@@ -17,7 +17,14 @@ import {
   RulesetName,
 } from "../../../../internal";
 import { presetDisplayNameMap } from "./const";
-import { ConwayControlsProps } from "./types";
+import { ConwayColorProp, ConwayControlsProps } from "./types";
+
+const conwayColorProps = [
+  "liveColor",
+  "deadColor",
+  "startingEnvelopeColor",
+  "finalEnvelopeColor",
+] as ConwayColorProp[];
 
 const ConwayControls = ({ config, setConfig }: ConwayControlsProps) => {
   const { grid } = useContext(GameContext);
@@ -139,34 +146,78 @@ const ConwayControls = ({ config, setConfig }: ConwayControlsProps) => {
           </FormGroup>
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={config.showEnvelope}
-              onChange={(e) => {
-                handleUpdate({
-                  ...config,
-                  showEnvelope: e.target.checked,
-                });
-              }}
-              name={"show-envelope-checkbox"}
+      <Grid item md={6} xs={12}>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={config.showEnvelope}
+                onChange={(e) => {
+                  handleUpdate({
+                    ...config,
+                    showEnvelope: e.target.checked,
+                  });
+                }}
+                name={"show-envelope-checkbox"}
+              />
+            }
+            label={"Show Envelope"}
+          />
+          {config.showEnvelope && (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={config.showEnvelopeGradient}
+                  onChange={(e) => {
+                    handleUpdate({
+                      ...config,
+                      showEnvelopeGradient: e.target.checked,
+                    });
+                  }}
+                  name={"envelope-gradient-checkbox"}
+                />
+              }
+              label={"Envelope Gradient"}
             />
-          }
-          label={"Show Envelope"}
-        />
+          )}
+        </FormGroup>
       </Grid>
-      {["liveColor", "deadColor", "envelopeColor"].map(
-        (color: "liveColor" | "deadColor" | "envelopeColor") => {
-          if (!config.showEnvelope && color === "envelopeColor") return null;
+      <Grid item md={6} xs={12}>
+        {config.showEnvelope && config.showEnvelopeGradient && (
+          <TextField
+            fullWidth
+            label="Envelope Gradient Steps"
+            type="number"
+            onChange={(e) =>
+              handleUpdate({
+                ...config,
+                envelopeGradientSteps: parseInt(e.target.value),
+              })
+            }
+            value={config.envelopeGradientSteps}
+          />
+        )}
+      </Grid>
+      <Grid container item xs={12} spacing={2}>
+        {conwayColorProps.map((color: ConwayColorProp) => {
+          if (
+            (!config.showEnvelope && color === "startingEnvelopeColor") ||
+            ((!config.showEnvelope || !config.showEnvelopeGradient) &&
+              color === "finalEnvelopeColor")
+          )
+            return null;
           let label = "Alive Color";
           if (color === "deadColor") {
             label = "Dead Color";
-          } else if (color === "envelopeColor") {
-            label = "Envelope Color";
+          } else if (color === "startingEnvelopeColor") {
+            label = config.showEnvelopeGradient
+              ? "Initial Envelope Color"
+              : "Envelope Color";
+          } else if (color === "finalEnvelopeColor") {
+            label = "Final Envelope Color";
           }
           return (
-            <Grid item xs={12} key={`conway-color-config-${color}`}>
+            <Grid item key={`conway-color-config-${color}`}>
               <MuiColorInput
                 format="hex"
                 label={label}
@@ -180,8 +231,41 @@ const ConwayControls = ({ config, setConfig }: ConwayControlsProps) => {
               />
             </Grid>
           );
-        }
-      )}
+        })}
+      </Grid>
+      <Grid item md={6} xs={12}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={config.mortalCells}
+              onChange={(e) => {
+                handleUpdate({
+                  ...config,
+                  mortalCells: e.target.checked,
+                });
+              }}
+              name={"mortal-cells-checkbox"}
+            />
+          }
+          label={"Mortal Cells (Cells Die After X Ticks)"}
+        />
+      </Grid>
+      <Grid item md={6} xs={12}>
+        {config.mortalCells && (
+          <TextField
+            fullWidth
+            label="Cell Lifespan"
+            type="number"
+            onChange={(e) =>
+              handleUpdate({
+                ...config,
+                cellLifespan: parseInt(e.target.value),
+              })
+            }
+            value={config.cellLifespan}
+          />
+        )}
+      </Grid>
     </>
   );
 };

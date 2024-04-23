@@ -26,12 +26,14 @@ class Grid {
     this.config.ruleset.init(this);
     this.render();
   }
-  iterateCells(fn: (cell: Cell) => void) {
-    this.rows.forEach((row) => row.forEach((cell) => fn(cell)));
+  iterateCells(fn: (cell: Cell, x?: number, y?: number) => void) {
+    this.rows.forEach((row, x) => row.forEach((cell, y) => fn(cell, x, y)));
   }
   render() {
     const cells: Cell[] = [];
-    this.iterateCells((cell) => cells.push(cell));
+    this.iterateCells((cell) => {
+      cells.push(cell);
+    });
     // sorting by color improves performance by reducing the number of times the fillStyle changes
     const sortedCells = [...cells].sort((a, b) =>
       a.currentColor > b.currentColor ? 1 : -1

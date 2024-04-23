@@ -1,1 +1,3 @@
-export interface WarGameConfig {}
+export interface WarGameConfig {
+  factionColors: string[];
+}

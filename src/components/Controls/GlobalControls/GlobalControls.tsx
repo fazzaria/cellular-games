@@ -15,14 +15,16 @@ import {
 import {
   CellShape,
   defaultCellSize,
-  defaultGlobalConfig,
+  defaultGlobalConfigs,
   defaultThrottleAmount,
   GameDescription,
   rulesetDisplayNameMap,
   RulesetName,
 } from "../../../internal";
 import { GlobalControlsProps } from "./types";
+import { useEffect } from "react";
 
+// move these to a context to stop re-renders
 const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
   const { gridConfig, rulesetName, throttleAmount } = config;
   const updateGridConfig = (prop: string, value: any) => {
@@ -31,6 +33,10 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
       gridConfig: { ...gridConfig, [prop]: value },
     });
   };
+
+  useEffect(() => {
+    setConfig(defaultGlobalConfigs[config.rulesetName]);
+  }, [config.rulesetName, setConfig]);
 
   return (
     <>
@@ -133,7 +139,9 @@ const GlobalControls = ({ config, setConfig }: GlobalControlsProps) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <Button onClick={() => setConfig(defaultGlobalConfig)}>
+        <Button
+          onClick={() => setConfig(defaultGlobalConfigs[config.rulesetName])}
+        >
           Reset to Default
         </Button>
       </Grid>

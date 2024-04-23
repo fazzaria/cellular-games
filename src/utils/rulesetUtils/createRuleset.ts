@@ -1,7 +1,5 @@
 import {
-  Blur,
   Conway,
-  Ecology,
   GameConfig,
   MazeGenerator,
   Pokemon,
@@ -14,12 +12,8 @@ import {
 
 const createRuleset = (rulesetName: RulesetName, config?: GameConfig) => {
   switch (rulesetName) {
-    case RulesetName.BLUR:
-      return new Blur(config);
     case RulesetName.CONWAY:
       return new Conway(config);
-    case RulesetName.ECOLOGY:
-      return new Ecology(config);
     case RulesetName.MAZE_GENERATOR:
       return new MazeGenerator(config);
     case RulesetName.POKEMON:

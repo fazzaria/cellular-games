@@ -5,9 +5,10 @@ export enum Preset {
 }
 
 export interface ConwayCellConfig {
+  age: number;
   isAlive: boolean;
   nextAlive: boolean;
-  previouslyAlive: boolean;
+  timesAlive: number;
 }
 
 export type ConwayCell = Omit<Cell, "config"> & {
@@ -15,12 +16,17 @@ export type ConwayCell = Omit<Cell, "config"> & {
 };
 
 export interface ConwayConfig {
+  cellLifespan: number;
   deadColor: string;
-  envelopeColor: string;
+  envelopeGradientSteps: number;
+  finalEnvelopeColor: string;
   neighborsNeededToReproduce: number[];
   neighborsNeededToSurvive: number[];
   liveColor: string;
   liveStartPercent: number;
+  mortalCells: boolean;
   preset: Preset;
   showEnvelope: boolean;
+  showEnvelopeGradient: boolean;
+  startingEnvelopeColor: string;
 }

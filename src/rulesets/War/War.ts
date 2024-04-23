@@ -1,7 +1,6 @@
 import {
   defaultGameOptions,
   Grid,
-  possibleColors,
   randomFromArray,
   Ruleset,
   RulesetName,
@@ -10,12 +9,15 @@ import { WarGameConfig } from "./types";
 
 class War implements Ruleset {
   constructor(config: Partial<WarGameConfig> = {}) {
-    this.config = { ...defaultGameOptions[RulesetName.WAR], ...config };
+    this.config = {
+      ...defaultGameOptions[RulesetName.WAR],
+      ...config,
+    } as WarGameConfig;
   }
   config: WarGameConfig;
   init(grid: Grid) {
     grid.iterateCells(
-      (cell) => (cell.currentColor = randomFromArray(possibleColors))
+      (cell) => (cell.currentColor = randomFromArray(this.config.factionColors))
     );
   }
   update(grid: Grid) {

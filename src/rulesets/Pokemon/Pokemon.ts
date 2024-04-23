@@ -27,7 +27,7 @@ class Pokemon implements Ruleset {
     grid.iterateCells((cell) => {
       const { allowedTypes, typeColors } = this.config;
       const type = randomFromArray(allowedTypes) || PokemonType.ELECTRIC;
-      cell.config.currentType = type;
+      cell.config = { currentType: type };
       cell.currentColor = typeColors[type];
     });
   }

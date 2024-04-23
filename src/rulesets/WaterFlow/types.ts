@@ -1,6 +1,15 @@
 import { Cell } from "../../classes";
 
-export interface WaterFlowGameConfig {}
+export interface WaterFlowGameConfig {
+  averageStartingWaterCells: number;
+  backgroundBlurAmount: number;
+  baseBackgroundColor: string;
+  blurBackground: boolean;
+  branchingChance: number;
+  rockHealthVariance: number;
+  trueRandom: boolean;
+  waterColors: string[];
+}
 
 export interface RockConfig {
   baseColor: string;

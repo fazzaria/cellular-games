@@ -1,3 +1,3 @@
-import defaultGlobalConfig from "./defaultGlobalConfig";
+import defaultGlobalConfigs from "./defaultGlobalConfigs";
 
-export { defaultGlobalConfig };
+export { defaultGlobalConfigs };

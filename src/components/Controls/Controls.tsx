@@ -20,7 +20,8 @@ import { GlobalControls } from "./GlobalControls";
 import { ControlsProps } from "./types";
 
 const Controls = ({ closeDrawer }: ControlsProps) => {
-  const { globalConfig, setGlobalConfig, setGrid } = useContext(GameContext);
+  const { globalConfig, paused, setGlobalConfig, setGrid, togglePause } =
+    useContext(GameContext);
   const [newGlobalConfig, setNewGlobalConfig] = useState<GlobalConfig>({
     ...globalConfig,
   });
@@ -36,6 +37,7 @@ const Controls = ({ closeDrawer }: ControlsProps) => {
     setGlobalConfig(combinedConfig);
     clearCanvas();
     setGrid(createGrid(combinedConfig));
+    if (paused) togglePause();
     closeDrawer();
   };
 

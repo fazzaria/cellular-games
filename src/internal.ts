@@ -7,7 +7,6 @@ export * from "./const/math";
 export * from "./const/strings";
 export * from "./utils/arrayUtils";
 export * from "./utils/colorUtils";
-export * from "./rulesets/Blur/types";
 export * from "./rulesets/RockPaperScissors/types";
 export * from "./rulesets/Snowflake/types";
 export * from "./rulesets/War/types";
@@ -30,7 +29,6 @@ export { default as Cell } from "./classes/Cell/Cell";
 
 // depends on Cell
 export * from "./rulesets/Conway/types";
-export * from "./rulesets/Ecology/types";
 export * from "./rulesets/MazeGenerator/types";
 export * from "./rulesets/Pokemon/types";
 export * from "./rulesets/WaterFlow/types";
@@ -51,9 +49,8 @@ export * from "./context/types";
 
 export { default as defaultPokemonColors } from "./const/defaults/gameSpecificOptions/defaultPokemonColors";
 export { default as defaultGameOptions } from "./const/defaults/gameSpecificOptions/defaultGameOptions";
-export { default as Blur } from "./rulesets/Blur/Blur";
+
 export { default as Conway } from "./rulesets/Conway/Conway";
-export { default as Ecology } from "./rulesets/Ecology/Ecology";
 export { default as MazeGenerator } from "./rulesets/MazeGenerator/MazeGenerator";
 export { default as Pokemon } from "./rulesets/Pokemon/Pokemon";
 export { default as RockPaperScissors } from "./rulesets/RockPaperScissors/RockPaperScissors";
@@ -63,7 +60,7 @@ export { default as WaterFlow } from "./rulesets/WaterFlow/WaterFlow";
 export { default as createRuleset } from "./utils/rulesetUtils/createRuleset";
 export { default as createGrid } from "./utils/gridUtils/createGrid";
 export { default as initializeConfigs } from "./utils/rulesetUtils/initializeConfigs";
-export { default as defaultGlobalConfig } from "./const/defaults/globalOptions/defaultGlobalConfig";
+export { default as defaultGlobalConfigs } from "./const/defaults/globalOptions/defaultGlobalConfigs";
 export { default as GameContext } from "./context/GameContext";
 
 export { default as useCanvas } from "./hooks/useCanvas";

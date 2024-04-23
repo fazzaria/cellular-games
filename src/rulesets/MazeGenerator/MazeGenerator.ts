@@ -14,7 +14,7 @@ class MazeGenerator implements Ruleset {
     grid.iterateCells((cell: MazeCell) => {
       const isAlive =
         Math.floor(Math.random() * 100) < this.config.liveStartPercent;
-      cell.config.isAlive = isAlive;
+      cell.config = { isAlive };
       cell.currentColor = isAlive
         ? this.config.liveColor
         : this.config.deadColor;

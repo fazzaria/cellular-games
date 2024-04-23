@@ -11,7 +11,7 @@ import { Canvas, CANVAS_ID, Controls, GameContext } from "../../internal";
 const GameScreen = () => {
   const { grid, paused, togglePause } = useContext(GameContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [controlsOpen, setControlsOpen] = useState(true);
+  const [controlsOpen, setControlsOpen] = useState(false);
   return (
     <>
       <Box

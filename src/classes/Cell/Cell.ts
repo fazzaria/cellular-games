@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { CellSetupConfig, GameConfig } from "../../internal";
+import { CellSetupConfig } from "../../internal";
 
 class Cell {
   constructor({ canvasX, canvasY, x, y }: CellSetupConfig) {
@@ -11,7 +11,7 @@ class Cell {
   }
   canvasX: number;
   canvasY: number;
-  config: GameConfig = {};
+  config: { [key: string]: any };
   currentColor: string;
   id: string;
   nextColor: string;

@@ -1,4 +1,10 @@
-import { defaultGameOptions, Grid, Ruleset, RulesetName } from "../../internal";
+import {
+  defaultGameOptions,
+  getGradientSteps,
+  Grid,
+  Ruleset,
+  RulesetName,
+} from "../../internal";
 import { ConwayCell, ConwayConfig } from "./types";
 
 class Conway implements Ruleset {
@@ -7,8 +13,30 @@ class Conway implements Ruleset {
       ...defaultGameOptions[RulesetName.CONWAY],
       ...config,
     } as ConwayConfig;
+    const {
+      envelopeGradientSteps,
+      finalEnvelopeColor,
+      showEnvelope,
+      showEnvelopeGradient,
+      startingEnvelopeColor,
+    } = this.config;
+    if (!showEnvelope) {
+      this.envelopeGradientColors = [];
+      return;
+    }
+    if (!showEnvelopeGradient) {
+      this.envelopeGradientColors = [startingEnvelopeColor];
+      return;
+    }
+    const envelopeGradientColors = getGradientSteps(
+      startingEnvelopeColor,
+      finalEnvelopeColor,
+      envelopeGradientSteps
+    );
+    this.envelopeGradientColors = envelopeGradientColors;
   }
   config: ConwayConfig;
+  envelopeGradientColors: string[];
   init(grid: Grid) {
     switch (this.config.preset) {
       default:
@@ -16,7 +44,12 @@ class Conway implements Ruleset {
         grid.iterateCells((cell: ConwayCell) => {
           const isAlive =
             Math.floor(Math.random() * 100) < this.config.liveStartPercent;
-          cell.config.isAlive = isAlive;
+          cell.config = {
+            age: 0,
+            isAlive,
+            nextAlive: false,
+            timesAlive: isAlive ? 1 : 0,
+          };
           cell.currentColor = isAlive
             ? this.config.liveColor
             : this.config.deadColor;
@@ -27,14 +60,34 @@ class Conway implements Ruleset {
   update(grid: Grid) {
     const {
       deadColor,
-      envelopeColor,
+      envelopeGradientSteps,
       liveColor,
+      mortalCells,
       neighborsNeededToReproduce,
       neighborsNeededToSurvive,
       showEnvelope,
     } = this.config;
+    const { envelopeGradientColors } = this;
     grid.iterateCells((cell: ConwayCell) => {
-      const { isAlive, previouslyAlive } = cell.config;
+      const { isAlive, timesAlive } = cell.config;
+      let nextColor = deadColor;
+
+      const handleDeadCell = () => {
+        cell.config.age = 0;
+        cell.config.nextAlive = false;
+        if (showEnvelope && timesAlive > 0) {
+          nextColor =
+            envelopeGradientColors[timesAlive] ??
+            envelopeGradientColors[envelopeGradientColors.length - 1];
+        }
+      };
+
+      if (cell.config.age > this.config.cellLifespan) {
+        handleDeadCell();
+        cell.setNextColor(nextColor);
+        return;
+      }
+
       const neighbors = grid.getNeighbors(cell);
       const numberOfLiveNeighbors = neighbors.filter(
         (neighbor: ConwayCell) => neighbor.config.isAlive
@@ -47,12 +100,14 @@ class Conway implements Ruleset {
         nextAliveState = true;
       }
       cell.config.nextAlive = nextAliveState;
-      let nextColor = deadColor;
       if (nextAliveState) {
         nextColor = liveColor;
-        cell.config.previouslyAlive = true;
-      } else if (showEnvelope && previouslyAlive) {
-        nextColor = envelopeColor;
+        if (timesAlive < envelopeGradientSteps) {
+          cell.config.timesAlive++;
+        }
+        if (mortalCells) cell.config.age++;
+      } else {
+        handleDeadCell();
       }
       cell.setNextColor(nextColor);
     });

@@ -14,7 +14,6 @@ const defaultGridConfig: GridConfig = {
   height,
   loops: defaultGridLoops,
   ruleset: createRuleset(defaultRulesetName),
-  screenDoor: false,
   width,
 };
 

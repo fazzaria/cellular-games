@@ -1,6 +1,4 @@
-export * from "./Blur";
 export * from "./Conway";
-export * from "./Ecology";
 export * from "./MazeGenerator";
 export * from "./Pokemon";
 export * from "./RockPaperScissors";

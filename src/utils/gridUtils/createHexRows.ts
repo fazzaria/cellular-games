@@ -1,17 +1,19 @@
-import { angleOfHexagonalSide, Cell, GridConfig } from "../../internal";
+import { Cell, GridConfig, angleOfHexagonalSide } from "../../internal";
 
 const createHexRows = (config: GridConfig) => {
   const rows: Cell[][] = [];
   const { cellSize, height, width } = config;
-  const cosA = Math.cos(angleOfHexagonalSide);
-  const sinA = Math.sin(angleOfHexagonalSide);
-
-  for (let y = cellSize; y + cellSize * sinA < height; y += cellSize * sinA) {
+  for (
+    let y = cellSize, j = 0;
+    y + cellSize * Math.sin(angleOfHexagonalSide) < height;
+    y += 2 ** ((j + 1) % 2) * cellSize * Math.sin(angleOfHexagonalSide), j = 0
+  ) {
     rows.push([]);
     for (
-      let x = cellSize, j = 0;
-      x + cellSize * (1 + cosA) < width;
-      x += cellSize * (1 + cosA), y += (-1) ** j++ * cellSize * sinA
+      let x = cellSize;
+      x + cellSize * (1 + Math.cos(angleOfHexagonalSide)) < width;
+      x += cellSize * (1 + Math.cos(angleOfHexagonalSide)),
+        y += (-1) ** j++ * cellSize * Math.sin(angleOfHexagonalSide)
     ) {
       const newHex = new Cell({
         canvasX: x,
