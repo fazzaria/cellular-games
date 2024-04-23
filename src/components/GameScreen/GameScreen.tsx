@@ -20,6 +20,7 @@ const GameScreen = () => {
         justifyContent="center"
         alignItems="center"
         minHeight="100vh"
+        pl={grid.config.cellSize / 6}
       >
         <Canvas canvasAttributes={{ id: CANVAS_ID }} />
         <Fab
