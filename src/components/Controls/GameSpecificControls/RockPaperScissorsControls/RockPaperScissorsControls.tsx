@@ -1,15 +1,22 @@
 import { Grid } from "@mui/material";
 import { MuiColorInput } from "mui-color-input";
-import { RockPaperScissorsControlsProps } from "./types";
 import { RPSGameConfig, RulesetName } from "../../../../internal";
+import { useContext, useMemo } from "react";
+import { ControlsContext } from "../../context";
 
-const RockPaperScissorsControls = ({
-  config,
-  setConfig,
-}: RockPaperScissorsControlsProps) => {
-  const handleUpdate = (newConfig: RPSGameConfig) => {
-    setConfig(RulesetName.ROCK_PAPER_SCISSORS, newConfig);
+const RockPaperScissorsControls = () => {
+  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
+  const config = useMemo(
+    () => newGameConfigs.ROCK_PAPER_SCISSORS as RPSGameConfig,
+    [newGameConfigs.ROCK_PAPER_SCISSORS]
+  );
+  const handleUpdate = (newRPSConfig: RPSGameConfig) => {
+    setNewGameConfigs({
+      ...newGameConfigs,
+      [RulesetName.ROCK_PAPER_SCISSORS]: newRPSConfig,
+    });
   };
+
   return (
     <>
       {["rockColor", "paperColor", "scissorsColor"].map(

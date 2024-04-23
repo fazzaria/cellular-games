@@ -37,7 +37,9 @@ const defaultGameOptions: { [key in RulesetName]: GameConfig } = {
     liveStartPercent: 10,
   } as MazeConfig,
   [RulesetName.POKEMON]: {
-    allowedTypes: Object.keys(PokemonType).map((key) => PokemonType[key]),
+    allowedTypes: Object.keys(PokemonType)
+      .map((key) => PokemonType[key])
+      .filter((type) => type !== PokemonType.DRAGON),
     randomMutationChance: 750,
     typeColors: defaultPokemonColors,
   } as PokemonGameConfig,

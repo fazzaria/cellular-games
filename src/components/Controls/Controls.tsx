@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   Box,
   Button,
@@ -8,38 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  GameConfigs,
-  GameContext,
-  GlobalConfig,
-  clearCanvas,
-  createGrid,
-} from "../../internal";
 import { GameSpecificControls } from "./GameSpecificControls";
 import { GlobalControls } from "./GlobalControls";
 import { ControlsProps } from "./types";
+import { ControlsContext } from "./context";
 
 const Controls = ({ closeDrawer }: ControlsProps) => {
-  const { globalConfig, paused, setGlobalConfig, setGrid, togglePause } =
-    useContext(GameContext);
-  const [newGlobalConfig, setNewGlobalConfig] = useState<GlobalConfig>({
-    ...globalConfig,
-  });
-  const [gameSpecificConfigs, setGameSpecificConfigs] = useState<GameConfigs>({
-    ...globalConfig.savedConfigs,
-  });
-
-  const start = () => {
-    const combinedConfig: GlobalConfig = {
-      ...newGlobalConfig,
-      savedConfigs: { ...gameSpecificConfigs },
-    };
-    setGlobalConfig(combinedConfig);
-    clearCanvas();
-    setGrid(createGrid(combinedConfig));
-    if (paused) togglePause();
-    closeDrawer();
-  };
+  const { newGlobalConfig, setNewGlobalConfig, start } =
+    useContext(ControlsContext);
 
   return (
     <Box p={5}>
@@ -76,17 +52,13 @@ const Controls = ({ closeDrawer }: ControlsProps) => {
             <Typography>Game-Specific Settings</Typography>
             <Divider />
           </Grid>
-          <GameSpecificControls
-            configs={gameSpecificConfigs}
-            rulesetName={newGlobalConfig.rulesetName}
-            setConfigs={setGameSpecificConfigs}
-          />
+          <GameSpecificControls />
         </Grid>
         <Grid item xs={12}>
           <Button
             fullWidth
             onClick={() => {
-              start();
+              start(closeDrawer);
             }}
             variant="contained"
           >

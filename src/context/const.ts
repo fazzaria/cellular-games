@@ -4,7 +4,7 @@ import { defaultGlobalConfigs, defaultRulesetName } from "../internal";
 const defaultGameContextValue: GameContextType = {
   globalConfig: { ...defaultGlobalConfigs[defaultRulesetName] },
   grid: null,
-  paused: false,
+  paused: true,
   setGlobalConfig: () => null,
   setGrid: () => null,
   togglePause: () => null,

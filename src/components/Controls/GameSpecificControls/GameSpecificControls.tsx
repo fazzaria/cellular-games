@@ -1,100 +1,43 @@
 import { Grid, Typography, Button } from "@mui/material";
-import {
-  ConwayConfig,
-  defaultGameOptions,
-  GameConfig,
-  MazeConfig,
-  PokemonGameConfig,
-  RPSGameConfig,
-  RulesetName,
-  SnowflakeGameConfig,
-  WarGameConfig,
-  WaterFlowGameConfig,
-} from "../../../internal";
+import { defaultGameOptions, RulesetName } from "../../../internal";
 import { ConwayControls } from "./ConwayControls";
 import { PokemonControls } from "./PokemonControls";
 import { RockPaperScissorsControls } from "./RockPaperScissorsControls";
-import { GameSpecificControlsProps, UpdateConfigFn } from "./types";
 import { MazeControls } from "./MazeControls";
 import { SnowflakeControls } from "./SnowflakeControls";
 import { WarControls } from "./WarControls.ts";
 import { WaterFlowControls } from "./WaterFlowControls";
+import { useContext, useMemo } from "react";
+import { ControlsContext } from "../context";
 
-const GameSpecificControls = ({
-  configs,
-  rulesetName,
-  setConfigs,
-}: GameSpecificControlsProps) => {
-  const handleUpdateConfig: UpdateConfigFn = (
-    prop: RulesetName,
-    value: GameConfig
-  ) => {
-    setConfigs({ ...configs, [prop]: value });
-  };
+const GameSpecificControls = () => {
+  const {
+    newGameConfigs,
+    newGlobalConfig: { rulesetName },
+    setNewGameConfigs,
+  } = useContext(ControlsContext);
 
-  let Component = null;
+  const Component = useMemo(() => {
+    switch (rulesetName) {
+      case RulesetName.CONWAY:
+        return () => <ConwayControls />;
+      case RulesetName.MAZE_GENERATOR:
+        return () => <MazeControls />;
+      case RulesetName.POKEMON:
+        return () => <PokemonControls />;
+      case RulesetName.ROCK_PAPER_SCISSORS:
+        return () => <RockPaperScissorsControls />;
+      case RulesetName.SNOWFLAKE:
+        return () => <SnowflakeControls />;
+      case RulesetName.WAR:
+        return () => <WarControls />;
+      case RulesetName.WATER_FLOW:
+        return () => <WaterFlowControls />;
+      default:
+        return null;
+    }
+  }, [rulesetName]);
 
-  switch (rulesetName) {
-    case RulesetName.CONWAY:
-      Component = () => (
-        <ConwayControls
-          config={configs[rulesetName] as ConwayConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-    case RulesetName.MAZE_GENERATOR:
-      Component = () => (
-        <MazeControls
-          config={configs[rulesetName] as MazeConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-    case RulesetName.POKEMON:
-      Component = () => (
-        <PokemonControls
-          config={configs[rulesetName] as PokemonGameConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-    case RulesetName.ROCK_PAPER_SCISSORS:
-      Component = () => (
-        <RockPaperScissorsControls
-          config={configs[rulesetName] as RPSGameConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-    case RulesetName.SNOWFLAKE:
-      Component = () => (
-        <SnowflakeControls
-          config={configs[rulesetName] as SnowflakeGameConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-    case RulesetName.WAR:
-      Component = () => (
-        <WarControls
-          config={configs[rulesetName] as WarGameConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-    case RulesetName.WATER_FLOW:
-      Component = () => (
-        <WaterFlowControls
-          config={configs[rulesetName] as WaterFlowGameConfig}
-          setConfig={handleUpdateConfig}
-        />
-      );
-      break;
-
-    default:
-      break;
-  }
   return (
     <>
       {Component === null ? (
@@ -110,7 +53,10 @@ const GameSpecificControls = ({
         <Grid item xs={12}>
           <Button
             onClick={() =>
-              handleUpdateConfig(rulesetName, defaultGameOptions[rulesetName])
+              setNewGameConfigs({
+                ...newGameConfigs,
+                [rulesetName]: defaultGameOptions[rulesetName],
+              })
             }
           >
             Reset to Default

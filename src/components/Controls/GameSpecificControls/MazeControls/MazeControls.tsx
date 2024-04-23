@@ -1,13 +1,23 @@
 import { Grid } from "@mui/material";
 import { MuiColorInput } from "mui-color-input";
 import { MazeConfig, RulesetName } from "../../../../internal";
-import { MazeColorProp, MazeControlsProps } from "./types";
+import { MazeColorProp } from "./types";
+import { useContext, useMemo } from "react";
+import { ControlsContext } from "../../context";
 
 const mazeColorProps = ["liveColor", "deadColor"] as MazeColorProp[];
 
-const MazeControls = ({ config, setConfig }: MazeControlsProps) => {
-  const handleUpdate = (newConfig: MazeConfig) => {
-    setConfig(RulesetName.MAZE_GENERATOR, newConfig);
+const MazeControls = () => {
+  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
+  const config = useMemo(
+    () => newGameConfigs.MAZE_GENERATOR as MazeConfig,
+    [newGameConfigs.MAZE_GENERATOR]
+  );
+  const handleUpdate = (newConwayConfig: MazeConfig) => {
+    setNewGameConfigs({
+      ...newGameConfigs,
+      [RulesetName.MAZE_GENERATOR]: newConwayConfig,
+    });
   };
 
   return (

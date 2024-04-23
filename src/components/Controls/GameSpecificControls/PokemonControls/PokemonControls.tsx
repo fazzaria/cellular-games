@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import {
   Grid,
   TextField,
@@ -10,20 +10,28 @@ import {
   MenuItem,
 } from "@mui/material";
 import { MuiColorInput } from "mui-color-input";
-import { PokemonControlsProps } from "./types";
 import {
   PokemonGameConfig,
   PokemonType,
   RulesetName,
 } from "../../../../internal";
+import { ControlsContext } from "../../context";
 
-const PokemonControls = ({ config, setConfig }: PokemonControlsProps) => {
+const PokemonControls = () => {
+  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
+  const config = useMemo(
+    () => newGameConfigs.POKEMON as PokemonGameConfig,
+    [newGameConfigs.POKEMON]
+  );
+  const handleUpdate = (newPokemonConfig: PokemonGameConfig) => {
+    setNewGameConfigs({
+      ...newGameConfigs,
+      [RulesetName.POKEMON]: newPokemonConfig,
+    });
+  };
   const [typeToChangeColor, setTypeToChangeColor] = useState<PokemonType>(
     PokemonType.BUG
   );
-  const handleUpdate = (newConfig: PokemonGameConfig) => {
-    setConfig(RulesetName.POKEMON, newConfig);
-  };
   const { allowedTypes, typeColors } = config;
   const allTypesAllowed =
     allowedTypes.length === Object.keys(PokemonType).length;

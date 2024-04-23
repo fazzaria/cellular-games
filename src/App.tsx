@@ -1,4 +1,5 @@
 import { GameContextProvider, GameScreen } from "./internal";
+
 const App = () => {
   return (
     <GameContextProvider>

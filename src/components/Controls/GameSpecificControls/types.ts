@@ -1,10 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-import { GameConfig, GameConfigs, RulesetName } from "../../../internal";
-
-export interface GameSpecificControlsProps {
-  configs: GameConfigs;
-  rulesetName: RulesetName;
-  setConfigs: Dispatch<SetStateAction<GameConfigs>>;
-}
+import { GameConfig, RulesetName } from "../../../internal";
 
 export type UpdateConfigFn = (prop: RulesetName, value: GameConfig) => void;
+
+export interface GameSpecificControlsProps {}

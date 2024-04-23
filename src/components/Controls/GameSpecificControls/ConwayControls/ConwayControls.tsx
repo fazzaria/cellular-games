@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import {
   Grid,
   TextField,
@@ -17,7 +17,8 @@ import {
   RulesetName,
 } from "../../../../internal";
 import { presetDisplayNameMap } from "./const";
-import { ConwayColorProp, ConwayControlsProps } from "./types";
+import { ConwayColorProp } from "./types";
+import { ControlsContext } from "../../context";
 
 const conwayColorProps = [
   "liveColor",
@@ -26,14 +27,24 @@ const conwayColorProps = [
   "finalEnvelopeColor",
 ] as ConwayColorProp[];
 
-const ConwayControls = ({ config, setConfig }: ConwayControlsProps) => {
+const ConwayControls = () => {
   const { grid } = useContext(GameContext);
+  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
+  const config = useMemo(
+    () => newGameConfigs.CONWAY as ConwayConfig,
+    [newGameConfigs.CONWAY]
+  );
+
   const neighborNumbers =
     grid.config.cellShape === "hex"
       ? [0, 1, 2, 3, 4, 5, 6]
       : [0, 1, 2, 3, 4, 5, 6, 7, 8];
-  const handleUpdate = (newConfig: ConwayConfig) => {
-    setConfig(RulesetName.CONWAY, newConfig);
+
+  const handleUpdate = (newConwayConfig: ConwayConfig) => {
+    setNewGameConfigs({
+      ...newGameConfigs,
+      [RulesetName.CONWAY]: newConwayConfig,
+    });
   };
 
   return (

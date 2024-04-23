@@ -7,11 +7,12 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Canvas, CANVAS_ID, Controls, GameContext } from "../../internal";
+import { ControlsContextProvider } from "../Controls/context";
 
 const GameScreen = () => {
   const { grid, paused, togglePause } = useContext(GameContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [controlsOpen, setControlsOpen] = useState(false);
+  const [controlsOpen, setControlsOpen] = useState(true);
   return (
     <>
       <Box
@@ -55,13 +56,15 @@ const GameScreen = () => {
           </Fab>
         </Collapse>
       </Box>
-      <Drawer
-        anchor="bottom"
-        open={controlsOpen}
-        onClose={() => setControlsOpen(false)}
-      >
-        <Controls closeDrawer={() => setControlsOpen(false)} />
-      </Drawer>
+      <ControlsContextProvider>
+        <Drawer
+          anchor="bottom"
+          open={controlsOpen}
+          onClose={() => setControlsOpen(false)}
+        >
+          <Controls closeDrawer={() => setControlsOpen(false)} />
+        </Drawer>
+      </ControlsContextProvider>
     </>
   );
 };

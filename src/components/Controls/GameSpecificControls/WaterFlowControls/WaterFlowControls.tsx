@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import {
   Checkbox,
   FormControlLabel,
@@ -15,13 +15,21 @@ import {
   WaterFlowGameConfig,
   getRandomColor,
 } from "../../../../internal";
-import { WaterFlowControlsProps } from "./types";
+import { ControlsContext } from "../../context";
 
-const WaterFlowControls = ({ config, setConfig }: WaterFlowControlsProps) => {
-  const [newWaterColor, setNewWaterColor] = useState(getRandomColor());
-  const handleUpdate = (newConfig: WaterFlowGameConfig) => {
-    setConfig(RulesetName.WATER_FLOW, newConfig);
+const WaterFlowControls = () => {
+  const { newGameConfigs, setNewGameConfigs } = useContext(ControlsContext);
+  const config = useMemo(
+    () => newGameConfigs.WATER_FLOW as WaterFlowGameConfig,
+    [newGameConfigs.WATER_FLOW]
+  );
+  const handleUpdate = (newWaterFlowConfig: WaterFlowGameConfig) => {
+    setNewGameConfigs({
+      ...newGameConfigs,
+      [RulesetName.WATER_FLOW]: newWaterFlowConfig,
+    });
   };
+  const [newWaterColor, setNewWaterColor] = useState(getRandomColor());
   const { waterColors } = config;
 
   return (
