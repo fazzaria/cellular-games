@@ -37,7 +37,7 @@ export const defaultGlobalConfigs: GlobalConfigs = {
     gridConfig: { cellShape: "hex" },
   }),
   [RulesetName.WATER_FLOW]: overrideDefaultGlobalConfig({
-    gridConfig: { cellShape: "hex", cellSize: 12 },
+    gridConfig: { cellShape: "hex", cellSize: 12, loops: false },
   }),
 };
 

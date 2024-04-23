@@ -63,7 +63,7 @@ const defaultGameOptions: GameSpecificConfigs = {
     blurBackground: true,
     branchingChance: 5,
     rockHealthVariance: 5,
-    trueRandom: true,
+    trueRandom: false,
     waterColors: ["#3e8090", "#1a546a", "#F6FDC3", "#D74B76", "#FF8080"],
   } as WaterFlowGameConfig,
 };
