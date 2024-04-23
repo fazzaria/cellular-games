@@ -9,10 +9,10 @@ const useGameSpecificOptions = <T>(rulesetName: RulesetName) => {
   const config = newGameSpecificConfigs[rulesetName] as T;
 
   const handleUpdate = useCallback(
-    (newConwayConfig: T) => {
+    (newConfig: T) => {
       setNewGameSpecificConfigs({
         ...newGameSpecificConfigs,
-        [RulesetName.CONWAY]: newConwayConfig,
+        [rulesetName]: newConfig,
       });
     },
     [newGameSpecificConfigs, setNewGameSpecificConfigs]

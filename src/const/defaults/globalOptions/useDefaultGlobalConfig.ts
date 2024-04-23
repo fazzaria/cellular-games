@@ -30,7 +30,9 @@ export const defaultGlobalConfigs: GlobalConfigs = {
   [RulesetName.ROCK_PAPER_SCISSORS]: overrideDefaultGlobalConfig({
     gridConfig: { cellShape: "hex" },
   }),
-  [RulesetName.SNOWFLAKE]: overrideDefaultGlobalConfig({}),
+  [RulesetName.SNOWFLAKE]: overrideDefaultGlobalConfig({
+    gridConfig: { cellSize: 8 },
+  }),
   [RulesetName.WAR]: overrideDefaultGlobalConfig({
     gridConfig: { cellShape: "hex" },
   }),
