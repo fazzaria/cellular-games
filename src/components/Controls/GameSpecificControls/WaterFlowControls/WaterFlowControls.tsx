@@ -73,7 +73,7 @@ const WaterFlowControls = () => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={config.blurBackground}
+                checked={config.trueRandom}
                 onChange={(e) => {
                   handleUpdate({
                     ...config,
@@ -81,6 +81,7 @@ const WaterFlowControls = () => {
                   });
                 }}
                 name={"true-random-checkbox"}
+                value={config.trueRandom}
               />
             }
             label={"Random Flow Direction"}
