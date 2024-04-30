@@ -1,4 +1,4 @@
-A toy app for generating visually interesting patterns based on the principles of cellular automata.
+An app for generating visually interesting patterns based on the principles of cellular automata.
 
 Try it on [Vercel](https://cellular-games.vercel.app/).
 
